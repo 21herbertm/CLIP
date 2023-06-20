@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import iOSDFULibrary
 
 @main
 struct CLIPApp: App {
