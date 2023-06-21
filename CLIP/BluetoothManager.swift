@@ -6,23 +6,55 @@
 //
 import Foundation
 import CoreBluetooth
+import iOSDFULibrary
 
-class BluetoothManager: NSObject, CBCentralManagerDelegate, ObservableObject {
+class BluetoothManager: NSObject, CBCentralManagerDelegate, ObservableObject, DFUServiceDelegate, DFUProgressDelegate, LoggerDelegate {
+    @Published var dfuUpdateFailed = false
+    
+    func dfuStateDidChange(to state: iOSDFULibrary.DFUState) {
+        print("DFU State did change to: \(state.description)")
+    }
+
+
+    func dfuError(_ error: DFUError, didOccurWithMessage message: String) {
+            print("DFU Error: \(error), message: \(message)")
+            self.dfuUpdateFailed = true
+        }
+
+    
+    func dfuProgressDidChange(for part: Int, outOf totalParts: Int, to progress: Int, currentSpeedBytesPerSecond: Double, avgSpeedBytesPerSecond: Double) {
+        print("DFU Progress did change to \(progress)%, part \(part) of \(totalParts), speed: \(currentSpeedBytesPerSecond) bytes/sec, average speed: \(avgSpeedBytesPerSecond) bytes/sec")
+    }
+
+    func logWith(_ level: iOSDFULibrary.LogLevel, message: String) {
+        print("DFU Log, level: \(level.name), message: \(message)")
+    }
+    
     @Published var discoveredDevices: [CBPeripheral] = []
     @Published var connectedDevices: [CBPeripheral] = []
 
     private var centralManager: CBCentralManager!
     private var connectedPeripheral: CBPeripheral?
+    private var commandCharacteristic: CBCharacteristic?
 
     override init() {
         super.init()
         centralManager = CBCentralManager(delegate: self, queue: nil)
     }
 
+// ******* THE SCANNING - CURRENTLY IT DOES NOT FILTER FOR CLIP DEVICES ***********
     func startScanning() {
         centralManager.scanForPeripherals(withServices: nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
     }
 
+// ******* THIS FUNCTION BELOW WOULD INCLUDE A UUID NUMEBR ***************
+    /*
+    func startScanning() {
+        let clipServiceUUID = CBUUID(string: "12345678-1234-1234-1234-1234567890AB")
+        //NEED TO INCLUDE THE CORRECT UUID NUMBER
+        centralManager.scanForPeripherals(withServices: [clipServiceUUID], options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
+    }
+*/
     func stopScanning() {
         centralManager.stopScan()
     }
@@ -34,6 +66,64 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, ObservableObject {
     func disconnectDevice(_ device: CBPeripheral) {
         centralManager.cancelPeripheralConnection(device)
     }
+
+    // Send the special command to tell the device to reboot into Bootloader mode
+    func rebootIntoBootloaderMode() {
+        guard let commandCharacteristic = self.commandCharacteristic else { return }
+        let enterBootloaderCommand: [UInt8] = [0x01]  // or [0x04] depending on your device's documentation THIS VALUE IS SPECIFIC TO THE DEVICE MAY NEED TO CHANGE!
+        let command = Data(enterBootloaderCommand)
+
+        connectedPeripheral?.writeValue(command, for: commandCharacteristic, type: .withResponse)
+    }
+
+    // Perform the firmware update
+    func updateFirmware() {
+        guard let path = Bundle.main.path(forResource: "Firmware", ofType: "zip") else {
+            print("Failed to find the firmware file in the app bundle.")
+            return
+        }
+
+        let url = URL(fileURLWithPath: path)
+
+        guard let selectedFirmware = try? DFUFirmware(urlToZipFile: url) else {
+            print("Failed to create DFUFirmware.")
+            return
+        }
+
+        let initiator = DFUServiceInitiator(centralManager: centralManager, target: connectedPeripheral!).with(firmware: selectedFirmware)
+        initiator.logger = self // - to get log info
+        initiator.delegate = self // - to be informed about current state and errors
+        initiator.progressDelegate = self // - to show progress bar
+        initiator.start()
+    }
+/*
+ IF THE FIRMWARE IS ON A SERVER USE THIS CODE:
+ func updateFirmware() {
+     let downloadURL = URL(string: "https://example.com/path/to/firmware.zip")!
+
+     let task = URLSession.shared.downloadTask(with: downloadURL) { [weak self] localURL, response, error in
+         guard let self = self else { return }
+
+         if let localURL = localURL {
+             guard let selectedFirmware = try? DFUFirmware(urlToZipFile: localURL) else {
+                 print("Failed to create DFUFirmware.")
+                 return
+             }
+
+             let initiator = DFUServiceInitiator(centralManager: self.centralManager, target: self.connectedPeripheral!).with(firmware: selectedFirmware)
+             initiator.logger = self // - to get log info
+             initiator.delegate = self // - to be informed about current state and errors
+             initiator.progressDelegate = self // - to show progress bar
+             initiator.start()
+         } else if let error = error {
+             print("Failed to download firmware file: \(error)")
+         }
+     }
+
+     task.resume()
+ }
+ 
+ */
 
     // MARK: - CBCentralManagerDelegate Methods
 
@@ -65,7 +155,28 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, ObservableObject {
         }
         connectedPeripheral = nil
     }
+
+    // MARK: - DFUServiceDelegate, DFUProgressDelegate, LoggerDelegate
+
+    // Implement required methods for handling the firmware update progress and results
 }
+
+func dfuStateDidChange(to state: iOSDFULibrary.DFUState) {
+    print("Updated DFU State: \(state.description)")
+}
+
+func dfuError(_ error: iOSDFULibrary.DFUError, didOccurWithMessage message: String) {
+    print("DFU Error: \(error): \(message)")
+}
+
+func dfuProgressDidChange(for part: Int, outOf totalParts: Int, to progress: Int, currentSpeedBytesPerSecond: Double, avgSpeedBytesPerSecond: Double) {
+    print("DFU progress: \(progress)%")
+}
+
+func logWith(_ level: iOSDFULibrary.LogLevel, message: String) {
+    print("DFU \(level.name): \(message)")
+}
+
 
 extension BluetoothManager: CBPeripheralDelegate {
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
@@ -77,9 +188,10 @@ extension BluetoothManager: CBPeripheralDelegate {
     }
 
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
-        if let characteristics = service.characteristics {
-            for _ in characteristics {
-                // Handle discovered characteristics
+        guard let characteristics = service.characteristics else { return }
+        for characteristic in characteristics {
+            if characteristic.uuid == CBUUID(string: "<insert characteristic UUID here>") {
+                self.commandCharacteristic = characteristic
             }
         }
     }

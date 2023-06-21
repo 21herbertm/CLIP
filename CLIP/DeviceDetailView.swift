@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreBluetooth
+
 struct DeviceDetailView: View {
     @EnvironmentObject var bluetoothManager: BluetoothManager
     @State private var isShowingConnectedAlert = false
@@ -42,7 +43,27 @@ struct DeviceDetailView: View {
                     .padding()
                     .shadow(radius: 4)
             }
+
+            Button(action: {
+                self.bluetoothManager.rebootIntoBootloaderMode()
+                self.bluetoothManager.updateFirmware()
+            }) {
+                Text("Reboot & Update")
+                    .font(.title)
+                    .padding()
+                    .background(Color.green)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+                    .padding()
+                    .shadow(radius: 4)
+            }
         }
+        
+        .alert(isPresented: $bluetoothManager.dfuUpdateFailed) {
+                    Alert(title: Text("Error"), message: Text("Could not update"), dismissButton: .default(Text("OK")) {
+                        bluetoothManager.dfuUpdateFailed = false // reset the flag
+                    })
+                }
         .padding()
         .navigationBarTitle(device.name ?? "Unknown Device")
         .alert(isPresented: $isShowingConnectedAlert) {
