@@ -9,6 +9,7 @@ import CoreBluetooth
 import iOSDFULibrary
 
 class BluetoothManager: NSObject, CBCentralManagerDelegate, ObservableObject, DFUServiceDelegate, DFUProgressDelegate, LoggerDelegate {
+    @Published var showLaunchScreen = true
     @Published var dfuUpdateFailed = false
     
     func dfuStateDidChange(to state: iOSDFULibrary.DFUState) {
