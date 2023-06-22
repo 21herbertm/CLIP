@@ -12,6 +12,8 @@ struct DeviceDetailView: View {
     @EnvironmentObject var bluetoothManager: BluetoothManager
     @State private var isShowingConnectedAlert = false
     @State private var dismissConnectedAlert = false
+    @State private var isShowingFailedToUpdateAlert = false // New state variable
+
     var device: CBPeripheral
 
     private var uniqueIdentifier: String {
@@ -58,21 +60,23 @@ struct DeviceDetailView: View {
                     .shadow(radius: 4)
             }
         }
-        
-        .alert(isPresented: $bluetoothManager.dfuUpdateFailed) {
-                    Alert(title: Text("Error"), message: Text("Could not update"), dismissButton: .default(Text("OK")) {
-                        bluetoothManager.dfuUpdateFailed = false // reset the flag
-                    })
-                }
         .padding()
         .navigationBarTitle(device.name ?? "Unknown Device")
         .alert(isPresented: $isShowingConnectedAlert) {
             Alert(title: Text("Connected"), dismissButton: .default(Text("OK")))
         }
+        .alert(isPresented: $isShowingFailedToUpdateAlert) { // Use the new state variable here
+            Alert(title: Text("Failed to Update"), message: Text("Could not update"), dismissButton: .default(Text("OK")))
+        }
         .id(uniqueIdentifier) // Set unique identifier for the view
         .onChange(of: dismissConnectedAlert) { dismiss in
             if dismiss {
                 isShowingConnectedAlert = false
+            }
+        }
+        .onChange(of: bluetoothManager.dfuUpdateFailed) { failed in // Watch for changes in dfuUpdateFailed flag
+            if failed {
+                isShowingFailedToUpdateAlert = true // Set the new state variable to show the failed update alert
             }
         }
     }

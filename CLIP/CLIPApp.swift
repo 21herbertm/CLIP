@@ -10,9 +10,13 @@ import iOSDFULibrary
 
 @main
 struct CLIPApp: App {
+    @StateObject private var bluetoothManager = BluetoothManager()
+
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(bluetoothManager)
         }
     }
 }
+

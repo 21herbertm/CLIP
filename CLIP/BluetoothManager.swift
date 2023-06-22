@@ -17,10 +17,11 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, ObservableObject, DF
 
 
     func dfuError(_ error: DFUError, didOccurWithMessage message: String) {
-            print("DFU Error: \(error), message: \(message)")
-            self.dfuUpdateFailed = true
-        }
-
+           DispatchQueue.main.async {
+               self.dfuUpdateFailed = true
+           }
+           print("DFU Error: \(error), message: \(message)")
+       }
     
     func dfuProgressDidChange(for part: Int, outOf totalParts: Int, to progress: Int, currentSpeedBytesPerSecond: Double, avgSpeedBytesPerSecond: Double) {
         print("DFU Progress did change to \(progress)%, part \(part) of \(totalParts), speed: \(currentSpeedBytesPerSecond) bytes/sec, average speed: \(avgSpeedBytesPerSecond) bytes/sec")
@@ -47,13 +48,16 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, ObservableObject, DF
         centralManager.scanForPeripherals(withServices: nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
     }
 
-// ******* THIS FUNCTION BELOW WOULD INCLUDE A UUID NUMEBR ***************
+// ******* SCAN SPECIFICALLY FOR CLIP DEVICES ***************
     /*
-    func startScanning() {
-        let clipServiceUUID = CBUUID(string: "12345678-1234-1234-1234-1234567890AB")
-        //NEED TO INCLUDE THE CORRECT UUID NUMBER
-        centralManager.scanForPeripherals(withServices: [clipServiceUUID], options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
-    }
+     func startScanning() {
+         let clipServiceUUID = CBUUID(string: "6E400002-B5A3-F393-E0A9-E50E24DCCA9E") // Main CLIP service UUID
+         let rxCharacteristicUUID = CBUUID(string: "6E400003-B5A3-F393-E0A9-E50E24DCCA9E") // RX (receive) characteristic UUID
+         let serviceUUIDs = [clipServiceUUID, rxCharacteristicUUID]
+         
+         centralManager.scanForPeripherals(withServices: serviceUUIDs, options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
+     }
+
 */
     func stopScanning() {
         centralManager.stopScan()
@@ -80,6 +84,7 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, ObservableObject, DF
     func updateFirmware() {
         guard let path = Bundle.main.path(forResource: "Firmware", ofType: "zip") else {
             print("Failed to find the firmware file in the app bundle.")
+            self.dfuUpdateFailed = true
             return
         }
 
@@ -87,15 +92,23 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, ObservableObject, DF
 
         guard let selectedFirmware = try? DFUFirmware(urlToZipFile: url) else {
             print("Failed to create DFUFirmware.")
+            self.dfuUpdateFailed = true
             return
         }
 
-        let initiator = DFUServiceInitiator(centralManager: centralManager, target: connectedPeripheral!).with(firmware: selectedFirmware)
+        guard let connectedPeripheral = connectedPeripheral else {
+            print("No device is connected.")
+            self.dfuUpdateFailed = true
+            return
+        }
+
+        let initiator = DFUServiceInitiator(centralManager: centralManager, target: connectedPeripheral).with(firmware: selectedFirmware)
         initiator.logger = self // - to get log info
         initiator.delegate = self // - to be informed about current state and errors
         initiator.progressDelegate = self // - to show progress bar
         initiator.start()
     }
+
 /*
  IF THE FIRMWARE IS ON A SERVER USE THIS CODE:
  func updateFirmware() {
@@ -189,10 +202,16 @@ extension BluetoothManager: CBPeripheralDelegate {
 
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         guard let characteristics = service.characteristics else { return }
+
         for characteristic in characteristics {
-            if characteristic.uuid == CBUUID(string: "<insert characteristic UUID here>") {
+            if characteristic.uuid == CBUUID(string: "6E400002-B5A3-F393-E0A9-E50E24DCCA9E") {
                 self.commandCharacteristic = characteristic
+                // TX (send TO clip) used here
+            } else if characteristic.uuid == CBUUID(string: "6E400003-B5A3-F393-E0A9-E50E24DCCA9E") {
+                // RX (receive FROM clip) used here
+                peripheral.setNotifyValue(true, for: characteristic)
             }
         }
     }
 }
+
