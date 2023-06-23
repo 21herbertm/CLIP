@@ -18,13 +18,14 @@ struct LaunchScreenView: View {
             
             Image("logo")
                 .resizable()
-                .aspectRatio(contentMode: .fit) // Preserve original aspect ratio
-                .frame(width: 200, height: 200) // Adjust frame size as needed
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 200, height: 200)
                 .rotationEffect(.degrees(isSpinning ? 360 : 0))
                 .animation(Animation.linear(duration: 0.5).repeatForever(autoreverses: false))
                 .onAppear {
                     isSpinning = true
                 }
+            
             Text("Bike Easy with this Free App")
                 .font(.title)
                 .padding(.bottom, 20)
@@ -33,3 +34,4 @@ struct LaunchScreenView: View {
         .background(Color.white)
     }
 }
+

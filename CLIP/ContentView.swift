@@ -7,23 +7,27 @@
 
 import SwiftUI
 import CoreBluetooth
+import AWSMobileClient
+import AWSAuthCore
+import AWSAuthUI
 
 struct ContentView: View {
     @StateObject var bluetoothManager = BluetoothManager()
     @State private var isScanning = false
-
+    @State private var isShowingLogin = false
+    
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
                 Color(UIColor.systemMint)
                     .frame(height: 120)
                     .edgesIgnoringSafeArea(.top)
-
+                
                 GeometryReader { geometry in
                     VStack {
                         if bluetoothManager.discoveredDevices.isEmpty {
                             Spacer()
-
+                            
                             Text("No devices found")
                                 .frame(maxWidth: .infinity)
                                 .font(.headline)
@@ -33,7 +37,7 @@ struct ContentView: View {
                                 .cornerRadius(10)
                                 .padding()
                                 .shadow(radius: 4)
-
+                            
                             Spacer()
                         } else {
                             List(Array(bluetoothManager.discoveredDevices.enumerated()), id: \.element.identifier) { (index, device) in
@@ -44,7 +48,7 @@ struct ContentView: View {
                                 }
                             }
                         }
-
+                        
                         Button(action: {
                             if isScanning {
                                 bluetoothManager.stopScanning()
@@ -68,10 +72,53 @@ struct ContentView: View {
             .background(Color.white)
             .edgesIgnoringSafeArea(.bottom)
             .navigationTitle("")
-            .onAppear {
-                bluetoothManager.startScanning()
+        }
+        .onAppear {
+            bluetoothManager.startScanning()
+            
+            // Check if the user is already signed in
+            AWSMobileClient.default().initialize { userState, error in
+                if let error = error {
+                    print("AWSMobileClient initialization error: \(error.localizedDescription)")
+                } else {
+                    if let userState = userState {
+                        print("AWSMobileClient is initialized and userState: \(userState.rawValue)")
+                    }
+                    
+                    if !AWSMobileClient.default().isSignedIn {
+                        // Show the login screen
+                        isShowingLogin = true
+                    }
+                }
             }
         }
-        .environmentObject(bluetoothManager)
+        .sheet(isPresented: $isShowingLogin) {
+            VStack {
+                Text("Login Screen")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                
+                Button(action: {
+                    // Perform login logic using AWSMobileClient APIs
+                    
+                    // After successful login, dismiss the login screen
+                    isShowingLogin = false
+                }) {
+                    Text("Login")
+                        .font(.title)
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(Color.blue)
+                        .cornerRadius(10)
+                }
+            }
+            .padding()
+        }
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
     }
 }

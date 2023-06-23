@@ -16,6 +16,7 @@
 		B09D32AF2A420392001D7733 /* DeviceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09D32AE2A420392001D7733 /* DeviceDetailView.swift */; };
 		B0B1254C2A44CE0A00D50B81 /* LaunchScreenView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0B1254B2A44CE0A00D50B81 /* LaunchScreenView.storyboard */; };
 		B0B1254E2A44CF3200D50B81 /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B1254D2A44CF3200D50B81 /* LaunchScreenView.swift */; };
+		B0B125542A44E78400D50B81 /* AWSManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B125532A44E78400D50B81 /* AWSManager.swift */; };
 		D8372BC9917073946F50F887 /* Pods_CLIP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CEFB03B7204E7BC69352087 /* Pods_CLIP.framework */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +33,7 @@
 		B09D32AE2A420392001D7733 /* DeviceDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDetailView.swift; sourceTree = "<group>"; };
 		B0B1254B2A44CE0A00D50B81 /* LaunchScreenView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreenView.storyboard; sourceTree = "<group>"; };
 		B0B1254D2A44CF3200D50B81 /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
+		B0B125532A44E78400D50B81 /* AWSManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWSManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 				B0B1254D2A44CF3200D50B81 /* LaunchScreenView.swift */,
 				B09227592A3CA3C3006DE80B /* ContentView.swift */,
 				B092275B2A3CA3C6006DE80B /* Assets.xcassets */,
+				B0B125532A44E78400D50B81 /* AWSManager.swift */,
 				B092275D2A3CA3C6006DE80B /* Preview Content */,
 				B09227652A3CA50A006DE80B /* BluetoothManager.swift */,
 			);
@@ -228,6 +231,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B0B1254E2A44CF3200D50B81 /* LaunchScreenView.swift in Sources */,
+				B0B125542A44E78400D50B81 /* AWSManager.swift in Sources */,
 				B092275A2A3CA3C3006DE80B /* ContentView.swift in Sources */,
 				B09227662A3CA50A006DE80B /* BluetoothManager.swift in Sources */,
 				B09227582A3CA3C3006DE80B /* CLIPApp.swift in Sources */,

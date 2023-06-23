@@ -1,20 +1,62 @@
 PODS:
+  - AWSAuthCore (2.19.1):
+    - AWSCore (= 2.19.1)
+  - AWSAuthUI (2.19.1):
+    - AWSAuthCore (= 2.19.1)
+    - AWSCore (= 2.19.1)
+  - AWSCognito (2.19.1):
+    - AWSCore (= 2.19.1)
+  - AWSCognitoIdentityProvider (2.19.1):
+    - AWSCognitoIdentityProviderASF (= 2.19.1)
+    - AWSCore (= 2.19.1)
+  - AWSCognitoIdentityProviderASF (2.19.1)
+  - AWSCore (2.19.1)
+  - AWSMobileClient (2.19.1):
+    - AWSAuthCore (= 2.19.1)
+    - AWSCognitoIdentityProvider (= 2.19.1)
+    - AWSCognitoIdentityProviderASF (= 2.19.1)
+    - AWSCore (= 2.19.1)
+  - AWSUserPoolsSignIn (2.19.1):
+    - AWSAuthCore (= 2.19.1)
+    - AWSCognitoIdentityProvider (= 2.19.1)
+    - AWSCore (= 2.19.1)
   - iOSDFULibrary (4.13.0):
     - ZIPFoundation (= 0.9.11)
   - ZIPFoundation (0.9.11)
 
 DEPENDENCIES:
+  - AWSAuthCore
+  - AWSAuthUI
+  - AWSCognito
+  - AWSMobileClient
+  - AWSUserPoolsSignIn
   - iOSDFULibrary
 
 SPEC REPOS:
   trunk:
+    - AWSAuthCore
+    - AWSAuthUI
+    - AWSCognito
+    - AWSCognitoIdentityProvider
+    - AWSCognitoIdentityProviderASF
+    - AWSCore
+    - AWSMobileClient
+    - AWSUserPoolsSignIn
     - iOSDFULibrary
     - ZIPFoundation
 
 SPEC CHECKSUMS:
+  AWSAuthCore: 387c5e3482edbbb0fe754fa110a2a0203c783432
+  AWSAuthUI: fd6da797f59ef205d94cad9d486296982f146414
+  AWSCognito: f50de600804941d083af37a7568905f31a774727
+  AWSCognitoIdentityProvider: e6932c709d3e0b234128aeb5f2052c9bf1032d8d
+  AWSCognitoIdentityProviderASF: 749f58b75e69f7f0144b9d38539525562b843d34
+  AWSCore: 55c154ae27efc5c98bdc30a0eeea5a35d10a2ab5
+  AWSMobileClient: b908cada3c35da9cfe5b4ff9947fcf70142495e7
+  AWSUserPoolsSignIn: cc80a0050c9f1282812b7d3f52f240f05201739f
   iOSDFULibrary: 3b9de67ed4bfb901b5f09c2fea843f65e152612d
   ZIPFoundation: b1f0de4eed33e74a676f76e12559ab6b75990197
 
-PODFILE CHECKSUM: ee5016591c069033bd73d285a28c2d7e293ca99b
+PODFILE CHECKSUM: 73a4a34d450d1187c48a827f04360f86916f27f3
 
 COCOAPODS: 1.12.1
