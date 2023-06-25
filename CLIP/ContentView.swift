@@ -15,7 +15,31 @@ struct ContentView: View {
     @StateObject var bluetoothManager = BluetoothManager()
     @State private var isScanning = false
     @State private var isShowingLogin = false
+    @State private var isShowingRegister = false
     
+    @State private var username = ""
+    @State private var password = ""
+    @State private var email = ""
+
+    func register(username: String, password: String, email: String) {
+        AWSMobileClient.default().signUp(username: username,
+                                          password: password,
+                                          userAttributes: ["email" : email]) { (signUpResult, error) in
+            if let signUpResult = signUpResult {
+                switch(signUpResult.signUpConfirmationState) {
+                case .confirmed:
+                    print("User is signed up and confirmed.")
+                case .unconfirmed:
+                    print("User is not confirmed and needs verification via \(signUpResult.codeDeliveryDetails!.deliveryMedium) sent at \(signUpResult.codeDeliveryDetails!.destination!)")
+                case .unknown:
+                    print("Unexpected case")
+                }
+            } else if let error = error {
+                print("\(error.localizedDescription)")
+            }
+        }
+    }
+
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
@@ -97,14 +121,88 @@ struct ContentView: View {
                 Text("Login Screen")
                     .font(.largeTitle)
                     .fontWeight(.bold)
-                
+
+                // Text field for username
+                TextField("Username", text: $username)
+                    .padding()
+                    .background(Color(.systemGray6))
+                    .cornerRadius(10)
+                    .padding(.bottom, 10)
+
+                // Text field for password
+                SecureField("Password", text: $password)
+                    .padding()
+                    .background(Color(.systemGray6))
+                    .cornerRadius(10)
+                    .padding(.bottom, 20)
+
                 Button(action: {
                     // Perform login logic using AWSMobileClient APIs
-                    
-                    // After successful login, dismiss the login screen
-                    isShowingLogin = false
+                    AWSMobileClient.default().signIn(username: username, password: password) { (signInResult, error) in
+                        if let error = error {
+                            print("Sign in error: \(error.localizedDescription)")
+                        } else if let signInResult = signInResult {
+                            switch(signInResult.signInState) {
+                            case .signedIn:
+                                print("User is signed in.")
+                                // After successful login, dismiss the login screen
+                                isShowingLogin = false
+                            default:
+                                print("Sign In needs info: \(signInResult.signInState.rawValue)")
+                            }
+                        }
+                    }
                 }) {
                     Text("Login")
+                        .font(.title)
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(Color.blue)
+                        .cornerRadius(10)
+                }
+                
+                Button(action: {
+                    isShowingRegister = true
+                    isShowingLogin = false
+                }) {
+                    Text("Register")
+                        .font(.title)
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(Color.blue)
+                        .cornerRadius(10)
+                }
+            }
+            .padding()
+        }
+        .sheet(isPresented: $isShowingRegister) {
+            VStack {
+                Text("Registration Screen")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+
+                TextField("Username", text: $username)
+                    .padding()
+                    .background(Color(.systemGray6))
+                    .cornerRadius(10)
+                    .padding(.bottom, 10)
+
+                SecureField("Password", text: $password)
+                    .padding()
+                    .background(Color(.systemGray6))
+                    .cornerRadius(10)
+                    .padding(.bottom, 10)
+                       
+                TextField("Email", text: $email)
+                    .padding()
+                    .background(Color(.systemGray6))
+                    .cornerRadius(10)
+                    .padding(.bottom, 20)
+
+                Button(action: {
+                    register(username: username, password: password, email: email)
+                }) {
+                    Text("Register")
                         .font(.title)
                         .foregroundColor(.white)
                         .padding()
@@ -122,3 +220,4 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
