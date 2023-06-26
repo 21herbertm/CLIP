@@ -118,10 +118,12 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, ObservableObject, DF
         // Handle Bluetooth state changes
     }
 
-    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String: Any], rssi RSSI: NSNumber) {
+    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         if let serviceData = advertisementData[CBAdvertisementDataServiceUUIDsKey] as? [CBUUID] {
-            if serviceData.contains(CBUUID(string: "6E400001-B5A3-F393-E0A9-E50E24DCCA9E")) {
-                discoveredDevices.append(peripheral)
+            if serviceData.contains(CBUUID(string: "6E400001-B5A3-F393-E0A9-E50E24DCCA9E")) && RSSI.intValue > -55 {
+                if !discoveredDevices.contains(where: { $0.identifier == peripheral.identifier }) {
+                    discoveredDevices.append(peripheral)
+                }
             }
         }
     }
@@ -174,19 +176,45 @@ extension BluetoothManager: CBPeripheralDelegate {
             }
         }
     }
-
+    
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         guard let characteristics = service.characteristics else { return }
-
+        
         for characteristic in characteristics {
             if characteristic.uuid == CBUUID(string: "6E400002-B5A3-F393-E0A9-E50E24DCCA9E") {
                 self.commandCharacteristic = characteristic
+                
                 // TX (send TO clip) used here
+                // To get a single reading
+                let command = "tV".data(using: .ascii)
+                peripheral.writeValue(command!, for: characteristic, type: .withResponse)
+                
+                // To enable continuous notifications
+                // Uncomment the following lines if you want to enable continuous notifications
+                // let continuousCommand = "tV1".data(using: .ascii)
+                // peripheral.writeValue(continuousCommand!, for: characteristic, type: .withResponse)
+                
             } else if characteristic.uuid == CBUUID(string: "6E400003-B5A3-F393-E0A9-E50E24DCCA9E") {
                 // RX (receive FROM clip) used here
                 peripheral.setNotifyValue(true, for: characteristic)
             }
         }
     }
+    
+    // Handle received notifications
+    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+        print("Did update value for \(characteristic.uuid.uuidString), error: \(error)")
+        if characteristic.uuid == CBUUID(string: "6E400003-B5A3-F393-E0A9-E50E24DCCA9E") {
+            if let data = characteristic.value {
+                print("Received data: \(data)")
+                if let string = String(data: data, encoding: .ascii) {
+                    print("Received string data: \(string)")
+                } else {
+                    print("Could not interpret data as ASCII string.")
+                }
+            } else {
+                print("No data received from characteristic.")
+            }
+        }
+    }
 }
-
