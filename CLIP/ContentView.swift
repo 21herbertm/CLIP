@@ -26,16 +26,21 @@ struct ContentView: View {
                                           password: password,
                                           userAttributes: ["email" : email]) { (signUpResult, error) in
             if let signUpResult = signUpResult {
-                switch(signUpResult.signUpConfirmationState) {
+                switch signUpResult.signUpConfirmationState {
                 case .confirmed:
                     print("User is signed up and confirmed.")
                 case .unconfirmed:
-                    print("User is not confirmed and needs verification via \(signUpResult.codeDeliveryDetails!.deliveryMedium) sent at \(signUpResult.codeDeliveryDetails!.destination!)")
+                    if let deliveryMedium = signUpResult.codeDeliveryDetails?.deliveryMedium,
+                       let destination = signUpResult.codeDeliveryDetails?.destination {
+                        print("User is not confirmed and needs verification via \(deliveryMedium) sent at \(destination)")
+                    } else {
+                        print("Code delivery details are missing.")
+                    }
                 case .unknown:
                     print("Unexpected case")
                 }
             } else if let error = error {
-                print("\(error.localizedDescription)")
+                print("Sign up error: \(error.localizedDescription)")
             }
         }
     }
@@ -174,6 +179,7 @@ struct ContentView: View {
                 }
             }
             .padding()
+            .environmentObject(bluetoothManager)
         }
         .sheet(isPresented: $isShowingRegister) {
             VStack {
@@ -211,6 +217,7 @@ struct ContentView: View {
                 }
             }
             .padding()
+            .environmentObject(bluetoothManager)
         }
     }
 }
@@ -220,4 +227,3 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
-

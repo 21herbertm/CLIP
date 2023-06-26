@@ -45,21 +45,25 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, ObservableObject, DF
     }
 
 // ******* THE SCANNING - CURRENTLY IT DOES NOT FILTER FOR CLIP DEVICES ***********
+    /*
     func startScanning() {
         centralManager.scanForPeripherals(withServices: nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
     }
-
+     */
+    
 // ******* SCAN SPECIFICALLY FOR CLIP DEVICES ***************
-    /*
-     func startScanning() {
-         let clipServiceUUID = CBUUID(string: "6E400002-B5A3-F393-E0A9-E50E24DCCA9E") // Main CLIP service UUID
+    
+    func startScanning() {
+         let nusServiceUUID = CBUUID(string: "6E400001-B5A3-F393-E0A9-E50E24DCCA9E") // NUS service UUID
+         let txCharacteristicUUID = CBUUID(string: "6E400002-B5A3-F393-E0A9-E50E24DCCA9E") // TX (transmit) characteristic UUID
          let rxCharacteristicUUID = CBUUID(string: "6E400003-B5A3-F393-E0A9-E50E24DCCA9E") // RX (receive) characteristic UUID
-         let serviceUUIDs = [clipServiceUUID, rxCharacteristicUUID]
+         
+         let serviceUUIDs = [nusServiceUUID, txCharacteristicUUID, rxCharacteristicUUID]
          
          centralManager.scanForPeripherals(withServices: serviceUUIDs, options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
-     }
+    }
 
-*/
+
     func stopScanning() {
         centralManager.stopScan()
     }
@@ -146,9 +150,10 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, ObservableObject, DF
     }
 
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String: Any], rssi RSSI: NSNumber) {
-        if let manufacturerData = advertisementData[CBAdvertisementDataManufacturerDataKey] as? Data {
-            // Check for any manufacturer data
-            discoveredDevices.append(peripheral)
+        if let serviceData = advertisementData[CBAdvertisementDataServiceUUIDsKey] as? [CBUUID] {
+            if serviceData.contains(CBUUID(string: "6E400001-B5A3-F393-E0A9-E50E24DCCA9E")) {
+                discoveredDevices.append(peripheral)
+            }
         }
     }
 
