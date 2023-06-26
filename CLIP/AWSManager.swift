@@ -14,6 +14,9 @@ import AWSCognitoIdentityProvider
 import AWSUserPoolsSignIn
 import AWSMobileClient
 
+//import SwiftyJSON
+
+
 class AWSManager {
     static let shared = AWSManager()
     
@@ -33,7 +36,13 @@ class AWSManager {
         
         AWSSignInManager.sharedInstance().register(signInProvider: AWSCognitoUserPoolsSignInProvider())
         
+        let filePath = Bundle.main.path(forResource: "awsconfiguration", ofType: "json")
 
+        if let filePath = filePath, let data = try? Data(contentsOf: URL(fileURLWithPath: filePath)), let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+            AWSInfo.configureDefaultAWSInfo(json)
+        }
+
+        
         AWSMobileClient.default().initialize { (userState, error) in
             if let error = error {
                 print("AWSMobileClient initialization error: \(error.localizedDescription)")
@@ -44,3 +53,12 @@ class AWSManager {
     }
 }
 
+/*
+        AWSMobileClient.default().initialize { (userState, error) in
+            if let error = error {
+                print("AWSMobileClient initialization error: \(error.localizedDescription)")
+            } else if let userState = userState {
+                print("AWSMobileClient is initialized and userState: \(userState.rawValue)")
+            }
+        }
+ */

@@ -34,6 +34,7 @@
 		B0B1254B2A44CE0A00D50B81 /* LaunchScreenView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreenView.storyboard; sourceTree = "<group>"; };
 		B0B1254D2A44CF3200D50B81 /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
 		B0B125532A44E78400D50B81 /* AWSManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWSManager.swift; sourceTree = "<group>"; };
+		B0E2B5632A4A05930034E5B3 /* awsconfiguration.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +96,7 @@
 				B09227592A3CA3C3006DE80B /* ContentView.swift */,
 				B092275B2A3CA3C6006DE80B /* Assets.xcassets */,
 				B0B125532A44E78400D50B81 /* AWSManager.swift */,
+				B0E2B5632A4A05930034E5B3 /* awsconfiguration.json */,
 				B092275D2A3CA3C6006DE80B /* Preview Content */,
 				B09227652A3CA50A006DE80B /* BluetoothManager.swift */,
 			);
