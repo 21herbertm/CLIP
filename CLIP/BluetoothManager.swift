@@ -79,69 +79,38 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, ObservableObject, DF
     // Send the special command to tell the device to reboot into Bootloader mode
     func rebootIntoBootloaderMode() {
         guard let commandCharacteristic = self.commandCharacteristic else { return }
-        let enterBootloaderCommand: [UInt8] = [0x01]  // or [0x04] depending on your device's documentation THIS VALUE IS SPECIFIC TO THE DEVICE MAY NEED TO CHANGE!
-        let command = Data(enterBootloaderCommand)
-
+        let enterBootloaderCommand = "tR2953253037".data(using: .ascii) // convert string to ASCII bytes
+        guard let command = enterBootloaderCommand else { return }
+        
         connectedPeripheral?.writeValue(command, for: commandCharacteristic, type: .withResponse)
     }
 
     // Perform the firmware update
     func updateFirmware() {
-        guard let path = Bundle.main.path(forResource: "Firmware", ofType: "zip") else {
-            print("Failed to find the firmware file in the app bundle.")
-            self.dfuUpdateFailed = true
-            return
+        let downloadURL = URL(string: "https://drive.google.com/file/d/1tpHDddaM3pxgfr3wcHORf1bEW1ZnEU9a/view?usp=drive_link")!
+
+        let task = URLSession.shared.downloadTask(with: downloadURL) { [weak self] localURL, response, error in
+            guard let self = self else { return }
+
+            if let localURL = localURL {
+                guard let selectedFirmware = try? DFUFirmware(urlToZipFile: localURL) else {
+                    print("Failed to create DFUFirmware.")
+                    return
+                }
+
+                let initiator = DFUServiceInitiator(centralManager: self.centralManager, target: self.connectedPeripheral!).with(firmware: selectedFirmware)
+                initiator.logger = self // - to get log info
+                initiator.delegate = self // - to be informed about current state and errors
+                initiator.progressDelegate = self // - to show progress bar
+                initiator.start()
+            } else if let error = error {
+                print("Failed to download firmware file: \(error)")
+            }
         }
 
-        let url = URL(fileURLWithPath: path)
-
-        guard let selectedFirmware = try? DFUFirmware(urlToZipFile: url) else {
-            print("Failed to create DFUFirmware.")
-            self.dfuUpdateFailed = true
-            return
-        }
-
-        guard let connectedPeripheral = connectedPeripheral else {
-            print("No device is connected.")
-            self.dfuUpdateFailed = true
-            return
-        }
-
-        let initiator = DFUServiceInitiator(centralManager: centralManager, target: connectedPeripheral).with(firmware: selectedFirmware)
-        initiator.logger = self // - to get log info
-        initiator.delegate = self // - to be informed about current state and errors
-        initiator.progressDelegate = self // - to show progress bar
-        initiator.start()
+        task.resume()
     }
 
-/*
- IF THE FIRMWARE IS ON A SERVER USE THIS CODE:
- func updateFirmware() {
-     let downloadURL = URL(string: "https://example.com/path/to/firmware.zip")!
-
-     let task = URLSession.shared.downloadTask(with: downloadURL) { [weak self] localURL, response, error in
-         guard let self = self else { return }
-
-         if let localURL = localURL {
-             guard let selectedFirmware = try? DFUFirmware(urlToZipFile: localURL) else {
-                 print("Failed to create DFUFirmware.")
-                 return
-             }
-
-             let initiator = DFUServiceInitiator(centralManager: self.centralManager, target: self.connectedPeripheral!).with(firmware: selectedFirmware)
-             initiator.logger = self // - to get log info
-             initiator.delegate = self // - to be informed about current state and errors
-             initiator.progressDelegate = self // - to show progress bar
-             initiator.start()
-         } else if let error = error {
-             print("Failed to download firmware file: \(error)")
-         }
-     }
-
-     task.resume()
- }
- 
- */
 
     // MARK: - CBCentralManagerDelegate Methods
 

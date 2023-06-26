@@ -11,27 +11,26 @@ struct LaunchScreenView: View {
     @State private var isSpinning = false
 
     var body: some View {
-        VStack {
-            Text("CLIP.Bike")
-                .font(.title)
-                .padding(.top, 20)
-            
-            Image("logo")
+        ZStack {
+            // Setting the background as image
+            Image("launch_background")
                 .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 200, height: 200)
-                .rotationEffect(.degrees(isSpinning ? 360 : 0))
-                .animation(Animation.linear(duration: 0.5).repeatForever(autoreverses: false))
-                .onAppear {
-                    isSpinning = true
-                }
+                .aspectRatio(contentMode: .fill)
+                .edgesIgnoringSafeArea(.all)
             
-            Text("Bike Easy with this Free App")
-                .font(.title)
-                .padding(.bottom, 20)
+            VStack {
+                
+                Image("logo")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 150, height: 150) // Adjusting the size of the logo
+                    .rotationEffect(.degrees(isSpinning ? 360 : 0))
+                    .animation(Animation.linear(duration: 0.2).repeatForever(autoreverses: false))
+                    .onAppear {
+                        isSpinning = true
+                    }
+                
+            }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.white)
     }
 }
-
