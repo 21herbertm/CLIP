@@ -107,20 +107,23 @@ struct ContentView: View {
             
             // Check if the user is already signed in
             AWSMobileClient.default().initialize { userState, error in
-                if let error = error {
-                    print("AWSMobileClient initialization error: \(error.localizedDescription)")
-                } else {
-                    if let userState = userState {
-                        print("AWSMobileClient is initialized and userState: \(userState.rawValue)")
-                    }
-                    
-                    if !AWSMobileClient.default().isSignedIn {
-                        // Show the login screen
-                        isShowingLogin = true
+                DispatchQueue.main.async {
+                    if let error = error {
+                        print("AWSMobileClient initialization error: \(error.localizedDescription)")
+                    } else {
+                        if let userState = userState {
+                            print("AWSMobileClient is initialized and userState: \(userState.rawValue)")
+                        }
+                        
+                        if !AWSMobileClient.default().isSignedIn {
+                            // Show the login screen
+                            isShowingLogin = true
+                        }
                     }
                 }
             }
         }
+
         .sheet(isPresented: $isShowingLogin) {
             VStack {
                 Text("Login Screen")
