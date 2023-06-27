@@ -13,8 +13,14 @@ struct MyClipView: View {
     var body: some View {
         VStack {
             Text("MyClip Page")
-            // You can present your telemetric data here.
-            // Use your bluetoothManager to access the data
+            Text("Telemetric data: \(bluetoothManager.receivedData)")
+                .font(.title)
+                .padding()
+            Button(action: {
+                            bluetoothManager.fetchDataFromCharacteristic()
+                        }) {
+                            Text("Fetch Data")
+                        }
         }
         .navigationBarTitle("MyClip", displayMode: .inline)
     }
