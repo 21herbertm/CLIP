@@ -196,6 +196,13 @@ struct ContentView: View {
                                 }
                             }
                         }
+                    }else {
+                        Text("Scan for devices and Bluetooth pair")
+                                                .font(.title)
+                                                .padding()
+                                                .onTapGesture {
+                                                    isScanning = true
+                                                }
                     }
                 } else if isShowingRegister {
                     // Add your registration view here
