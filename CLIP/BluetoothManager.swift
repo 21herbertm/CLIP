@@ -11,6 +11,7 @@ import iOSDFULibrary
 class BluetoothManager: NSObject, CBCentralManagerDelegate, ObservableObject, DFUServiceDelegate, DFUProgressDelegate, LoggerDelegate {
     @Published var showLaunchScreen = true
     @Published var dfuUpdateFailed = false
+    @Published var isAuthenticated = false
     
     func dfuStateDidChange(to state: iOSDFULibrary.DFUState) {
         print("DFU State did change to: \(state.description)")

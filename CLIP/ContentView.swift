@@ -14,10 +14,10 @@ import AWSAuthUI
 
 struct ContentView: View {
     @StateObject var bluetoothManager = BluetoothManager()
-    @State private var isScanning = false
     @State private var isShowingLogin = false
     @State private var isShowingRegister = false
     @State private var isAuthenticated = false
+    @State private var isScanning = false
     
     @State private var username = ""
     @State private var password = ""
@@ -116,165 +116,94 @@ struct ContentView: View {
     }
     
     var body: some View {
-            VStack {
-                if isAuthenticated {
-                    if isScanning {
-                        NavigationView {
-                            VStack(spacing: 0) {
-                                Color(UIColor.systemMint)
-                                    .frame(height: 120)
-                                    .edgesIgnoringSafeArea(.top)
-                                
-                                GeometryReader { geometry in
-                                    VStack {
-                                        if bluetoothManager.discoveredDevices.isEmpty {
-                                            Spacer()
-                                            
-                                            Text("No devices found")
-                                                .frame(maxWidth: .infinity)
-                                                .font(.headline)
-                                                .padding()
-                                                .background(Color.white)
-                                                .foregroundColor(.black)
-                                                .cornerRadius(10)
-                                                .padding()
-                                                .shadow(radius: 4)
-                                            
-                                            Spacer()
-                                        } else {
-                                            List(Array(bluetoothManager.discoveredDevices.enumerated()), id: \.element.identifier) { (index, device) in
-                                                NavigationLink(destination: DeviceDetailView(device: device)
-                                                    .environmentObject(bluetoothManager)
-                                                ) {
-                                                    Text(device.name ?? "Unknown Device")
-                                                }
-                                            }
-                                        }
-                                        
-                                        Button(action: {
-                                            if isScanning {
-                                                bluetoothManager.stopScanning()
-                                            } else {
-                                                bluetoothManager.startScanning()
-                                            }
-                                            isScanning.toggle()
-                                        }) {
-                                            Text(isScanning ? "Stop Scanning" : "Scan for Devices")
-                                                .padding()
-                                                .background(Color.blue)
-                                                .foregroundColor(.white)
-                                                .cornerRadius(10)
-                                                .padding()
-                                                .shadow(radius: 4)
-                                        }
-                                    }
-                                    .padding()
+        VStack {
+            if isAuthenticated {
+                            if isScanning {
+                                NavigationLink(destination: ScanDevicesView(isScanning: $isScanning)
+                                                    .environmentObject(bluetoothManager),
+                                               isActive: $isScanning) {
+                                    EmptyView()
+                                }
+                                .hidden()
+                            } else {
+                                NavigationLink(destination: ScanDevicesView(isScanning: $isScanning)
+                                                    .environmentObject(bluetoothManager)) {
+                                    Text("Scan for devices and Bluetooth pair")
+                                        .font(.title)
+                                        .padding()
                                 }
                             }
-                            .background(Color.white)
-                            .edgesIgnoringSafeArea(.bottom)
-                            .navigationTitle("")
-                        }
-                        .onAppear {
-                            bluetoothManager.startScanning()
-                            
-                            // Check if the user is already signed in
-                            AWSMobileClient.default().initialize { userState, error in
-                                DispatchQueue.main.async {
-                                    if let error = error {
-                                        print("AWSMobileClient initialization error: \(error.localizedDescription)")
-                                    } else {
-                                        if let userState = userState {
-                                            print("AWSMobileClient is initialized and userState: \(userState.rawValue)")
-                                        }
-                                        
-                                        if !AWSMobileClient.default().isSignedIn {
-                                            // Show the login screen
-                                            isShowingLogin = true
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }else {
-                        Text("Scan for devices and Bluetooth pair")
-                                                .font(.title)
-                                                .padding()
-                                                .onTapGesture {
-                                                    isScanning = true
-                                                }
-                    }
-                } else if isShowingRegister {
-                    // Add your registration view here
-                    VStack {
-                        Text("Registration Screen")
-                            .font(.largeTitle)
-                            .fontWeight(.bold)
+                        }else if isShowingRegister {
+                        // Add your registration view here
+                        VStack {
+                            Text("Registration Screen")
+                                .font(.largeTitle)
+                                .fontWeight(.bold)
 
-                        TextField("Username", text: $username)
-                            .padding()
-                            .background(Color(.systemGray6))
-                            .cornerRadius(10)
-                            .padding(.bottom, 10)
-
-                        SecureField("Password", text: $password)
-                            .padding()
-                            .background(Color(.systemGray6))
-                            .cornerRadius(10)
-                            .padding(.bottom, 10)
-                        
-                        TextField("Email", text: $email)
-                            .padding()
-                            .background(Color(.systemGray6))
-                            .cornerRadius(10)
-                            .padding(.bottom, 20)
-
-                        Button(action: {
-                            register(username: username, password: password, email: email)
-                        }) {
-                            Text("Register")
-                                .font(.title)
-                                .foregroundColor(.white)
+                            TextField("Username", text: $username)
                                 .padding()
-                                .background(Color.blue)
+                                .background(Color(.systemGray6))
                                 .cornerRadius(10)
-                        }
-                    }
-                    .padding()
-                    .environmentObject(bluetoothManager)
-                } else {
-                    loginView()
-                }
-                
-                if isAuthenticated {
-                    TabView {
-                        MyClipView()
-                            .tabItem {
-                                Image(systemName: "1.circle")
-                                Text("MyClip")
+                                .padding(.bottom, 10)
+
+                            SecureField("Password", text: $password)
+                                .padding()
+                                .background(Color(.systemGray6))
+                                .cornerRadius(10)
+                                .padding(.bottom, 10)
+                            
+                            TextField("Email", text: $email)
+                                .padding()
+                                .background(Color(.systemGray6))
+                                .cornerRadius(10)
+                                .padding(.bottom, 20)
+
+                            Button(action: {
+                                register(username: username, password: password, email: email)
+                            }) {
+                                Text("Register")
+                                    .font(.title)
+                                    .foregroundColor(.white)
+                                    .padding()
+                                    .background(Color.blue)
+                                    .cornerRadius(10)
                             }
-                        
-                        SupportView()
-                            .tabItem {
-                                Image(systemName: "2.circle")
-                                Text("Support")
-                            }
-                        
-                        NavigationView {
-                            AccountView()
-                                .navigationBarTitleDisplayMode(.inline)
-                                .navigationTitle("Account")
                         }
-                        .tabItem {
-                            Image(systemName: "3.circle")
-                            Text("Account")
-                        }
+                        .padding()
+                        .environmentObject(bluetoothManager)
+                    } else {
+                        loginView()
                     }
-                    .environmentObject(bluetoothManager)
+                    
+                    if isAuthenticated {
+                        TabView {
+                            MyClipView()
+                                .tabItem {
+                                    Image(systemName: "1.circle")
+                                    Text("MyClip")
+                                }
+                            
+                            SupportView()
+                                .tabItem {
+                                    Image(systemName: "2.circle")
+                                    Text("Support")
+                                }
+                            
+                            NavigationView {
+                                AccountView()
+                                    .navigationBarTitleDisplayMode(.inline)
+                                    .navigationTitle("Account")
+                            }
+                            .tabItem {
+                                Image(systemName: "3.circle")
+                                Text("Account")
+                            }
+                        }
+                        .environmentObject(bluetoothManager)
+                    }
                 }
             }
         }
-    }
 
     struct ContentView_Previews: PreviewProvider {
         static var previews: some View {

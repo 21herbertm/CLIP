@@ -4,7 +4,6 @@
 //
 //  Created by Melanie Herbert on 6/16/23.
 //
-
 import SwiftUI
 import iOSDFULibrary
 
@@ -14,20 +13,21 @@ struct CLIPApp: App {
 
     var body: some Scene {
         WindowGroup {
-            Group {
+            ZStack {
                 if bluetoothManager.showLaunchScreen {
                     LaunchScreenView()
-                        .onAppear {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                bluetoothManager.showLaunchScreen = false
-                            }
-                        }
                 } else {
-                    ContentView()
-                        .environmentObject(bluetoothManager)
+                    NavigationView {
+                        ContentView()
+                            .environmentObject(bluetoothManager)
+                    }
+                }
+            }
+            .onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    bluetoothManager.showLaunchScreen = false
                 }
             }
         }
     }
 }
-
