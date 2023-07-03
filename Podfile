@@ -7,5 +7,8 @@ target 'CLIP' do
   pod 'AWSCognito'
   pod 'AWSUserPoolsSignIn'
   pod 'AWSMobileClient'
+  pod 'Amplify'
+  pod 'AmplifyPlugins/AWSCognitoAuthPlugin'
+  pod 'AmplifyPlugins/AWSS3StoragePlugin'
 
 end

@@ -1,4 +1,18 @@
 PODS:
+  - Amplify (1.5.0):
+    - Amplify/Default (= 1.5.0)
+  - Amplify/Default (1.5.0)
+  - AmplifyPlugins/AWSCognitoAuthPlugin (1.5.0):
+    - AWSAuthCore (~> 2.19.0)
+    - AWSCognitoIdentityProvider (~> 2.19.0)
+    - AWSCognitoIdentityProviderASF (~> 2.19.0)
+    - AWSCore (~> 2.19.0)
+    - AWSMobileClient (~> 2.19.0)
+    - AWSPluginsCore (= 1.5.0)
+  - AmplifyPlugins/AWSS3StoragePlugin (1.5.0):
+    - AWSCore (~> 2.19.0)
+    - AWSPluginsCore (= 1.5.0)
+    - AWSS3 (~> 2.19.0)
   - AWSAuthCore (2.19.1):
     - AWSCore (= 2.19.1)
   - AWSAuthUI (2.19.1):
@@ -16,6 +30,12 @@ PODS:
     - AWSCognitoIdentityProvider (= 2.19.1)
     - AWSCognitoIdentityProviderASF (= 2.19.1)
     - AWSCore (= 2.19.1)
+  - AWSPluginsCore (1.5.0):
+    - Amplify (= 1.5.0)
+    - AWSCore (~> 2.19.0)
+    - AWSMobileClient (~> 2.19.0)
+  - AWSS3 (2.19.1):
+    - AWSCore (= 2.19.1)
   - AWSUserPoolsSignIn (2.19.1):
     - AWSAuthCore (= 2.19.1)
     - AWSCognitoIdentityProvider (= 2.19.1)
@@ -25,6 +45,9 @@ PODS:
   - ZIPFoundation (0.9.11)
 
 DEPENDENCIES:
+  - Amplify
+  - AmplifyPlugins/AWSCognitoAuthPlugin
+  - AmplifyPlugins/AWSS3StoragePlugin
   - AWSAuthCore
   - AWSAuthUI
   - AWSCognito
@@ -34,6 +57,8 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - Amplify
+    - AmplifyPlugins
     - AWSAuthCore
     - AWSAuthUI
     - AWSCognito
@@ -41,11 +66,15 @@ SPEC REPOS:
     - AWSCognitoIdentityProviderASF
     - AWSCore
     - AWSMobileClient
+    - AWSPluginsCore
+    - AWSS3
     - AWSUserPoolsSignIn
     - iOSDFULibrary
     - ZIPFoundation
 
 SPEC CHECKSUMS:
+  Amplify: 4d188462f31a3dfde270e556a338bfbcee9132c7
+  AmplifyPlugins: 150ace360ecda03061c4f10677da4f0f9311e1be
   AWSAuthCore: 387c5e3482edbbb0fe754fa110a2a0203c783432
   AWSAuthUI: fd6da797f59ef205d94cad9d486296982f146414
   AWSCognito: f50de600804941d083af37a7568905f31a774727
@@ -53,10 +82,12 @@ SPEC CHECKSUMS:
   AWSCognitoIdentityProviderASF: 749f58b75e69f7f0144b9d38539525562b843d34
   AWSCore: 55c154ae27efc5c98bdc30a0eeea5a35d10a2ab5
   AWSMobileClient: b908cada3c35da9cfe5b4ff9947fcf70142495e7
+  AWSPluginsCore: a278324b1a3ef7fdee4336382b7871991d0e98f2
+  AWSS3: 2272253b098d07803af8dd20ce6ce7302bcffb47
   AWSUserPoolsSignIn: cc80a0050c9f1282812b7d3f52f240f05201739f
   iOSDFULibrary: 3b9de67ed4bfb901b5f09c2fea843f65e152612d
   ZIPFoundation: b1f0de4eed33e74a676f76e12559ab6b75990197
 
-PODFILE CHECKSUM: 73a4a34d450d1187c48a827f04360f86916f27f3
+PODFILE CHECKSUM: 947cfdcf6568398b2c3eeba07002c8bd1197fdad
 
 COCOAPODS: 1.12.1
