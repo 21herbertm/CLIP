@@ -190,7 +190,7 @@ extension BluetoothManager: CBPeripheralDelegate {
 
                 // TX (send TO clip) used here
                 // To get a single reading
-                let command = "tV".data(using: .ascii)
+                let command = "tV1".data(using: .ascii)
                 peripheral.writeValue(command!, for: characteristic, type: .withResponse)
 
                 // To enable continuous notifications
