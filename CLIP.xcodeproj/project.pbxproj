@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		72C0661D2A53109900B3871D /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 72C0661B2A53109900B3871D /* awsconfiguration.json */; };
+		72C0661E2A53109900B3871D /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 72C0661C2A53109900B3871D /* amplifyconfiguration.json */; };
 		B09227582A3CA3C3006DE80B /* CLIPApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09227572A3CA3C3006DE80B /* CLIPApp.swift */; };
 		B092275A2A3CA3C3006DE80B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09227592A3CA3C3006DE80B /* ContentView.swift */; };
 		B092275C2A3CA3C6006DE80B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B092275B2A3CA3C6006DE80B /* Assets.xcassets */; };
@@ -23,6 +25,8 @@
 /* Begin PBXFileReference section */
 		1CEFB03B7204E7BC69352087 /* Pods_CLIP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CLIP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		58913F1F0DF99ECBDDBD4D9D /* Pods-CLIP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CLIP.debug.xcconfig"; path = "Target Support Files/Pods-CLIP/Pods-CLIP.debug.xcconfig"; sourceTree = "<group>"; };
+		72C0661B2A53109900B3871D /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = SOURCE_ROOT; };
+		72C0661C2A53109900B3871D /* amplifyconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = amplifyconfiguration.json; sourceTree = SOURCE_ROOT; };
 		7F6044038E87A9C4F6327528 /* Pods-CLIP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CLIP.release.xcconfig"; path = "Target Support Files/Pods-CLIP/Pods-CLIP.release.xcconfig"; sourceTree = "<group>"; };
 		B09227542A3CA3C3006DE80B /* CLIP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CLIP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B09227572A3CA3C3006DE80B /* CLIPApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLIPApp.swift; sourceTree = "<group>"; };
@@ -89,6 +93,8 @@
 		B09227562A3CA3C3006DE80B /* CLIP */ = {
 			isa = PBXGroup;
 			children = (
+				72C0661C2A53109900B3871D /* amplifyconfiguration.json */,
+				72C0661B2A53109900B3871D /* awsconfiguration.json */,
 				B09D32AE2A420392001D7733 /* DeviceDetailView.swift */,
 				B09227572A3CA3C3006DE80B /* CLIPApp.swift */,
 				B0B1254B2A44CE0A00D50B81 /* LaunchScreenView.storyboard */,
@@ -177,7 +183,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72C0661D2A53109900B3871D /* awsconfiguration.json in Resources */,
 				B092275F2A3CA3C6006DE80B /* Preview Assets.xcassets in Resources */,
+				72C0661E2A53109900B3871D /* amplifyconfiguration.json in Resources */,
 				B092275C2A3CA3C6006DE80B /* Assets.xcassets in Resources */,
 				B0B1254C2A44CE0A00D50B81 /* LaunchScreenView.storyboard in Resources */,
 			);
