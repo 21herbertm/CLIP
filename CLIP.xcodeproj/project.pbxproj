@@ -7,12 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		72C0661D2A53109900B3871D /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 72C0661B2A53109900B3871D /* awsconfiguration.json */; };
-		72C0661E2A53109900B3871D /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 72C0661C2A53109900B3871D /* amplifyconfiguration.json */; };
-		72C066232A53127A00B3871D /* ScanDevicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C0661F2A53127A00B3871D /* ScanDevicesView.swift */; };
-		72C066242A53127A00B3871D /* MyClipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C066202A53127A00B3871D /* MyClipView.swift */; };
-		72C066252A53127A00B3871D /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C066212A53127A00B3871D /* AccountView.swift */; };
-		72C066262A53127A00B3871D /* SupportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C066222A53127A00B3871D /* SupportView.swift */; };
 		72C066282A53130000B3871D /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C066272A53130000B3871D /* SessionManager.swift */; };
 		B09227582A3CA3C3006DE80B /* CLIPApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09227572A3CA3C3006DE80B /* CLIPApp.swift */; };
 		B092275A2A3CA3C3006DE80B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09227592A3CA3C3006DE80B /* ContentView.swift */; };
@@ -24,18 +18,18 @@
 		B0B1254C2A44CE0A00D50B81 /* LaunchScreenView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0B1254B2A44CE0A00D50B81 /* LaunchScreenView.storyboard */; };
 		B0B1254E2A44CF3200D50B81 /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B1254D2A44CF3200D50B81 /* LaunchScreenView.swift */; };
 		B0B125542A44E78400D50B81 /* AWSManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B125532A44E78400D50B81 /* AWSManager.swift */; };
+		B0EACD452A563CCC001B2D67 /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = B0EACD442A563CCC001B2D67 /* amplifyconfiguration.json */; };
+		B0EACD472A563CF8001B2D67 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EACD462A563CF8001B2D67 /* AccountView.swift */; };
+		B0EACD492A563D12001B2D67 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = B0EACD482A563D12001B2D67 /* awsconfiguration.json */; };
+		B0EACD4B2A563D35001B2D67 /* MyClipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EACD4A2A563D35001B2D67 /* MyClipView.swift */; };
+		B0EACD4D2A563D52001B2D67 /* ScanDevicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EACD4C2A563D52001B2D67 /* ScanDevicesView.swift */; };
+		B0EACD4F2A563D6D001B2D67 /* SupportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EACD4E2A563D6D001B2D67 /* SupportView.swift */; };
 		D8372BC9917073946F50F887 /* Pods_CLIP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CEFB03B7204E7BC69352087 /* Pods_CLIP.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1CEFB03B7204E7BC69352087 /* Pods_CLIP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CLIP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		58913F1F0DF99ECBDDBD4D9D /* Pods-CLIP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CLIP.debug.xcconfig"; path = "Target Support Files/Pods-CLIP/Pods-CLIP.debug.xcconfig"; sourceTree = "<group>"; };
-		72C0661B2A53109900B3871D /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = SOURCE_ROOT; };
-		72C0661C2A53109900B3871D /* amplifyconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = amplifyconfiguration.json; sourceTree = SOURCE_ROOT; };
-		72C0661F2A53127A00B3871D /* ScanDevicesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScanDevicesView.swift; path = ../../../../../../Users/shimonsarkar/Downloads/ScanDevicesView.swift; sourceTree = "<group>"; };
-		72C066202A53127A00B3871D /* MyClipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyClipView.swift; path = ../../../../../../Users/shimonsarkar/Downloads/MyClipView.swift; sourceTree = "<group>"; };
-		72C066212A53127A00B3871D /* AccountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountView.swift; path = ../../../../../../Users/shimonsarkar/Downloads/AccountView.swift; sourceTree = "<group>"; };
-		72C066222A53127A00B3871D /* SupportView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SupportView.swift; path = ../../../../../../Users/shimonsarkar/Downloads/SupportView.swift; sourceTree = "<group>"; };
 		72C066272A53130000B3871D /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		7F6044038E87A9C4F6327528 /* Pods-CLIP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CLIP.release.xcconfig"; path = "Target Support Files/Pods-CLIP/Pods-CLIP.release.xcconfig"; sourceTree = "<group>"; };
 		B09227542A3CA3C3006DE80B /* CLIP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CLIP.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -49,6 +43,12 @@
 		B0B1254D2A44CF3200D50B81 /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
 		B0B125532A44E78400D50B81 /* AWSManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWSManager.swift; sourceTree = "<group>"; };
 		B0E2B5632A4A05930034E5B3 /* awsconfiguration.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
+		B0EACD442A563CCC001B2D67 /* amplifyconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = amplifyconfiguration.json; path = ../../../amplifyconfiguration.json; sourceTree = "<group>"; };
+		B0EACD462A563CF8001B2D67 /* AccountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountView.swift; path = ../../../../Downloads/AccountView.swift; sourceTree = "<group>"; };
+		B0EACD482A563D12001B2D67 /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = awsconfiguration.json; path = ../../../../Downloads/awsconfiguration.json; sourceTree = "<group>"; };
+		B0EACD4A2A563D35001B2D67 /* MyClipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyClipView.swift; path = ../../../../Downloads/MyClipView.swift; sourceTree = "<group>"; };
+		B0EACD4C2A563D52001B2D67 /* ScanDevicesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScanDevicesView.swift; path = ../../../../Downloads/ScanDevicesView.swift; sourceTree = "<group>"; };
+		B0EACD4E2A563D6D001B2D67 /* SupportView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SupportView.swift; path = ../../../../Downloads/SupportView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,12 +103,12 @@
 		B09227562A3CA3C3006DE80B /* CLIP */ = {
 			isa = PBXGroup;
 			children = (
-				72C0661C2A53109900B3871D /* amplifyconfiguration.json */,
-				72C0661B2A53109900B3871D /* awsconfiguration.json */,
-				72C066212A53127A00B3871D /* AccountView.swift */,
-				72C066202A53127A00B3871D /* MyClipView.swift */,
-				72C0661F2A53127A00B3871D /* ScanDevicesView.swift */,
-				72C066222A53127A00B3871D /* SupportView.swift */,
+				B0EACD442A563CCC001B2D67 /* amplifyconfiguration.json */,
+				B0EACD482A563D12001B2D67 /* awsconfiguration.json */,
+				B0EACD462A563CF8001B2D67 /* AccountView.swift */,
+				B0EACD4A2A563D35001B2D67 /* MyClipView.swift */,
+				B0EACD4C2A563D52001B2D67 /* ScanDevicesView.swift */,
+				B0EACD4E2A563D6D001B2D67 /* SupportView.swift */,
 				B09D32AE2A420392001D7733 /* DeviceDetailView.swift */,
 				72C066272A53130000B3871D /* SessionManager.swift */,
 				B09227572A3CA3C3006DE80B /* CLIPApp.swift */,
@@ -198,9 +198,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				72C0661D2A53109900B3871D /* awsconfiguration.json in Resources */,
+				B0EACD452A563CCC001B2D67 /* amplifyconfiguration.json in Resources */,
+				B0EACD492A563D12001B2D67 /* awsconfiguration.json in Resources */,
 				B092275F2A3CA3C6006DE80B /* Preview Assets.xcassets in Resources */,
-				72C0661E2A53109900B3871D /* amplifyconfiguration.json in Resources */,
 				B092275C2A3CA3C6006DE80B /* Assets.xcassets in Resources */,
 				B0B1254C2A44CE0A00D50B81 /* LaunchScreenView.storyboard in Resources */,
 			);
@@ -255,17 +255,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				72C066262A53127A00B3871D /* SupportView.swift in Sources */,
+				B0EACD4F2A563D6D001B2D67 /* SupportView.swift in Sources */,
+				B0EACD4B2A563D35001B2D67 /* MyClipView.swift in Sources */,
+				B0EACD472A563CF8001B2D67 /* AccountView.swift in Sources */,
 				B0B1254E2A44CF3200D50B81 /* LaunchScreenView.swift in Sources */,
 				B0B125542A44E78400D50B81 /* AWSManager.swift in Sources */,
 				B092275A2A3CA3C3006DE80B /* ContentView.swift in Sources */,
 				B09227662A3CA50A006DE80B /* BluetoothManager.swift in Sources */,
-				72C066242A53127A00B3871D /* MyClipView.swift in Sources */,
 				B09227582A3CA3C3006DE80B /* CLIPApp.swift in Sources */,
-				72C066252A53127A00B3871D /* AccountView.swift in Sources */,
-				72C066232A53127A00B3871D /* ScanDevicesView.swift in Sources */,
 				B09D32AF2A420392001D7733 /* DeviceDetailView.swift in Sources */,
 				72C066282A53130000B3871D /* SessionManager.swift in Sources */,
+				B0EACD4D2A563D52001B2D67 /* ScanDevicesView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

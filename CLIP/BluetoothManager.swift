@@ -225,6 +225,9 @@ extension BluetoothManager: CBPeripheralDelegate {
                 if let string = String(data: data, encoding: .ascii) {
                     print("Received string data: \(string)")
                     self.receivedData = string // update the published variable
+                    
+                    // Log data to AWS S3
+                    AWSManager.shared.logRPMData(receivedData)
                 } else {
                     print("Could not interpret data as ASCII string.")
                 }
@@ -233,5 +236,4 @@ extension BluetoothManager: CBPeripheralDelegate {
             }
         }
     }
-
 }

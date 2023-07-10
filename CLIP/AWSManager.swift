@@ -5,53 +5,43 @@
 //  Created by Melanie Herbert on 6/22/23.
 //
 
-import Foundation
-import AWSCore
-import AWSCognito
-import AWSAuthCore
-import AWSAuthUI
-import AWSCognitoIdentityProvider
-import AWSUserPoolsSignIn
-import AWSMobileClient
-
-//import SwiftyJSON
-
+import Amplify
+import AmplifyPlugins
 
 class AWSManager {
+    
     static let shared = AWSManager()
+    let s3BucketKey = "rpm_data/"
     
-    private init() {}
-    
-    func initialize() {
-        AWSDDLog.sharedInstance.logLevel = .info // Set log level as desired
-        AWSDDLog.add(AWSDDTTYLogger.sharedInstance)
+    // Function to upload RPM data to S3
+    func logRPMData(_ data: String) {
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let dateString = formatter.string(from: date)
         
-        let userPoolId = "us-east-1_0HSPmqQoE" // Replace with your User Pool ID
-        let clientId = "138gvukqt59557bintiqbhqtdn" // Replace with your Client ID
-        
-        let serviceConfiguration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: nil)
-        let poolConfiguration = AWSCognitoIdentityUserPoolConfiguration(clientId: clientId, clientSecret: nil, poolId: userPoolId)
-        
-        AWSCognitoIdentityUserPool.register(with: serviceConfiguration, userPoolConfiguration: poolConfiguration, forKey: "UserPool")
-        
-        AWSSignInManager.sharedInstance().register(signInProvider: AWSCognitoUserPoolsSignInProvider())
-        
-        let filePath = Bundle.main.path(forResource: "awsconfiguration", ofType: "json")
-
-        if let filePath = filePath, let data = try? Data(contentsOf: URL(fileURLWithPath: filePath)), let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-            AWSInfo.configureDefaultAWSInfo(json)
+        // Construct the log data
+        let logData: [String: Any] = ["date": dateString, "rpm": data]
+        let logDataJSON: Data
+        do {
+            logDataJSON = try JSONSerialization.data(withJSONObject: logData, options: [])
+        } catch {
+            print("Error serializing the JSON: \(error)")
+            return
         }
-
         
-        AWSMobileClient.default().initialize { (userState, error) in
-            if let error = error {
-                print("AWSMobileClient initialization error: \(error.localizedDescription)")
-            } else if let userState = userState {
-                print("AWSMobileClient is initialized and userState: \(userState.rawValue)")
+        let key = "\(self.s3BucketKey)logs/\(dateString).json"
+        Amplify.Storage.uploadData(key: key, data: logDataJSON, options: nil) { result in
+            switch result {
+            case .success(let key):
+                print("Upload completed: \(key)")
+            case .failure(let storageError):
+                print("Upload failed: \(storageError.errorDescription). \(storageError.recoverySuggestion)")
             }
         }
     }
 }
+
 
 /*
         AWSMobileClient.default().initialize { (userState, error) in

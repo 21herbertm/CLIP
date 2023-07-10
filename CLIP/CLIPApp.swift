@@ -16,7 +16,7 @@ struct CLIPApp: App {
     init() {
         configureAmplify()
     }
-
+    
     var body: some Scene {
         WindowGroup {
             ZStack {
@@ -40,12 +40,12 @@ struct CLIPApp: App {
     // Add the AWS Cognito Plugin
     private func configureAmplify() {
         do {
-            try Amplify.add(plugin: AWSCognitoAuthPlugin())
+            try Amplify.add(plugin: AWSCognitoAuthPlugin()) // Add this line
             try Amplify.add(plugin: AWSS3StoragePlugin())
             try Amplify.configure()
-            print("Amplify configured successfully")
+            print("Amplify configured with storage and auth plugins")
         } catch {
-            print("Could not initialize Amplify", error)
+            print("Failed to initialize Amplify with \(error)")
         }
     }
 }
