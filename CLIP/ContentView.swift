@@ -13,7 +13,7 @@ import AWSAuthCore
 import AWSAuthUI
 
 struct ContentView: View {
-    @StateObject var bluetoothManager = BluetoothManager()
+    @EnvironmentObject var bluetoothManager: BluetoothManager
     @State private var isShowingLogin = false
     @State private var isShowingRegister = false
     @State private var isAuthenticated = false
