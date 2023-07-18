@@ -190,13 +190,13 @@ extension BluetoothManager: CBPeripheralDelegate {
                 
                 // TX (send TO clip) used here
                 // To get a single reading
-                let command = "tV1".data(using: .ascii)
-                peripheral.writeValue(command!, for: characteristic, type: .withResponse)
+                //let command = "tV1".data(using: .ascii)
+                //peripheral.writeValue(command!, for: characteristic, type: .withResponse)
                 
                 // To enable continuous notifications
                 // Uncomment the following lines if you want to enable continuous notifications
-                // let continuousCommand = "tV1".data(using: .ascii)
-                // peripheral.writeValue(continuousCommand!, for: characteristic, type: .withResponse)
+                let continuousCommand = "tV".data(using: .ascii)
+                peripheral.writeValue(continuousCommand!, for: characteristic, type: .withResponse)
                 
             } else if characteristic.uuid == CBUUID(string: "6E400003-B5A3-F393-E0A9-E50E24DCCA9E") {
                 // RX (receive FROM clip) used here

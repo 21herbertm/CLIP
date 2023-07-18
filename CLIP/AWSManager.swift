@@ -17,7 +17,7 @@ class AWSManager {
     // Store multiple logs in a dictionary
     var logData: [[String: Any]] = []
     
-    var nextUploadTime: Date = Date().addingTimeInterval(10*60) // The initial time to start uploading the data
+    var nextUploadTime: Date = Date().addingTimeInterval(10*6) // The initial time to start uploading the data
     
     // Function to accumulate RPM data
   func logRPMData(_ data: String) {
