@@ -221,29 +221,42 @@ extension BluetoothManager: CBPeripheralDelegate {
         peripheral.writeValue(command!, for: characteristic, type: .withResponse)
     }
     
-    // Function to parse and log RPM data
-    func logParsedRPMData(_ data: String) {
-        let components = data.components(separatedBy: ",")
-        if components.count >= 2, let rpm = Int(components[1]) {
-            let rpmString = String(rpm)
-            AWSManager.shared.logRPMData(rpmString)
+    func extractRPM(from dataString: String) -> String? {
+        // Assuming the RPM value is always followed by a comma
+        // First, we locate the range of "RPM "
+        if let range = dataString.range(of: "RPM ") {
+            // Then, we find the range of the following comma
+            if let endRange = dataString[range.upperBound...].firstIndex(of: ",") {
+                // Extract the substring from the data string
+                let rpmValue = String(dataString[range.upperBound..<endRange])
+                return rpmValue
+            }
         }
+        return nil
     }
+    
     
     // Handle received notifications
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         print("Did update value for \(characteristic.uuid.uuidString), error: \(error)")
-        if characteristic.uuid == CBUUID(string: "6E400003-B5A3-F393-E0A9-E50E24DCCA9E") {
+        
+        if characteristic.uuid == CBUUID(string: "6E400003-B5A3-F393-E0A9-E50E24DCCA9E") { // TV1 data
             if let data = characteristic.value {
                 print("Received data: \(data)")
                 if let string = String(data: data, encoding: .ascii) {
                     print("Received string data: \(string)")
                     self.receivedData = string // update the published variable
                     
+                    // Extract the RPM value from the data string and log it
+                    if let rpmValue = extractRPM(from: string) {
+                        AWSManager.shared.logRPMData(rpmValue)
+                    }
+                    
                     // Log data to AWS S3...
-                    AWSManager.shared.logRPMData(string) // Call the method on the shared instance of AWSManager
+                    AWSManager.shared.logData(string) // Call the method on the shared instance of AWSManager
                 }
             }
         }
+        // Add more characteristic UUID checks here if necessary
     }
 }
