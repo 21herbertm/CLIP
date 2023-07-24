@@ -236,6 +236,8 @@ extension BluetoothManager: CBPeripheralDelegate {
     }
     
     
+    
+    
     // Handle received notifications
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         print("Did update value for \(characteristic.uuid.uuidString), error: \(error)")

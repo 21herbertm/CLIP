@@ -18,6 +18,7 @@
 		B0B1254C2A44CE0A00D50B81 /* LaunchScreenView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0B1254B2A44CE0A00D50B81 /* LaunchScreenView.storyboard */; };
 		B0B1254E2A44CF3200D50B81 /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B1254D2A44CF3200D50B81 /* LaunchScreenView.swift */; };
 		B0B125542A44E78400D50B81 /* AWSManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B125532A44E78400D50B81 /* AWSManager.swift */; };
+		B0BB9E3E2A6EC43300786E0B /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BB9E3D2A6EC43300786E0B /* ChartView.swift */; };
 		B0EACD452A563CCC001B2D67 /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = B0EACD442A563CCC001B2D67 /* amplifyconfiguration.json */; };
 		B0EACD472A563CF8001B2D67 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EACD462A563CF8001B2D67 /* AccountView.swift */; };
 		B0EACD492A563D12001B2D67 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = B0EACD482A563D12001B2D67 /* awsconfiguration.json */; };
@@ -42,6 +43,7 @@
 		B0B1254B2A44CE0A00D50B81 /* LaunchScreenView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreenView.storyboard; sourceTree = "<group>"; };
 		B0B1254D2A44CF3200D50B81 /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
 		B0B125532A44E78400D50B81 /* AWSManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWSManager.swift; sourceTree = "<group>"; };
+		B0BB9E3D2A6EC43300786E0B /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		B0E2B5632A4A05930034E5B3 /* awsconfiguration.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
 		B0EACD442A563CCC001B2D67 /* amplifyconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = amplifyconfiguration.json; path = ../../../amplifyconfiguration.json; sourceTree = "<group>"; };
 		B0EACD462A563CF8001B2D67 /* AccountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountView.swift; path = ../../../../Downloads/AccountView.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				B0EACD4A2A563D35001B2D67 /* MyClipView.swift */,
 				B0EACD4C2A563D52001B2D67 /* ScanDevicesView.swift */,
 				B0EACD4E2A563D6D001B2D67 /* SupportView.swift */,
+				B0BB9E3D2A6EC43300786E0B /* ChartView.swift */,
 				B09D32AE2A420392001D7733 /* DeviceDetailView.swift */,
 				72C066272A53130000B3871D /* SessionManager.swift */,
 				B09227572A3CA3C3006DE80B /* CLIPApp.swift */,
@@ -266,6 +269,7 @@
 				B09D32AF2A420392001D7733 /* DeviceDetailView.swift in Sources */,
 				72C066282A53130000B3871D /* SessionManager.swift in Sources */,
 				B0EACD4D2A563D52001B2D67 /* ScanDevicesView.swift in Sources */,
+				B0BB9E3E2A6EC43300786E0B /* ChartView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

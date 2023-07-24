@@ -19,6 +19,9 @@ class AWSManager {
     var rpmLogData: [[String: Any]] = []
     var temperatureLogData: [[String: Any]] = []
     var voltageLogData: [[String: Any]] = []
+    var totalMiles: Double = 0.0
+    var totalMilesLogData: [[String: Any]] = []
+
     
     var nextUploadTime: Date = Date().addingTimeInterval(10*6) // The initial time to start uploading the data
     
@@ -49,6 +52,7 @@ class AWSManager {
         let currentLogData: [String: Any] = ["date": dateString, "rpm": rpm]
         self.rpmLogData.append(currentLogData)
         
+        updateTotalMiles()
         checkAndUpload()
     }
     
@@ -67,6 +71,48 @@ class AWSManager {
         // Similar to logRPMData
     }
     
+    func calculateTotalMiles() -> Double {
+        let polePairs = 14.0
+        let radius = 1.5 // inches
+        let inchesPerMile = 63360.0
+
+        // Calculate circumference in inches
+        let circumference = 2 * Double.pi * radius
+        // Convert circumference from inches to miles
+        let circumferenceMiles = circumference / inchesPerMile
+
+        var totalDistance = 0.0
+
+        for item in rpmLogData {
+            // Get the rpm value, convert from String to Double, then divide by polePairs
+            if let rpmString = item["rpm"] as? String, let rpm = Double(rpmString) {
+                let convertedRpm = rpm / polePairs
+                let distance = convertedRpm * circumferenceMiles
+                print("Adding distance: \(distance)")
+                totalDistance += distance
+            }
+        }
+
+        return totalDistance
+    }
+
+    
+
+    func updateTotalMiles() {
+        totalMiles = calculateTotalMiles()
+        
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let dateString = formatter.string(from: date)
+
+        let totalMilesLogEntry: [String: Any] = ["date": dateString, "totalMiles": totalMiles]
+        self.totalMilesLogData.append(totalMilesLogEntry)
+        
+        print("Total miles: \(totalMiles)")
+    }
+
+
     
     // Function to upload accumulated data to S3
     // Function to upload accumulated data to S3
@@ -84,6 +130,9 @@ class AWSManager {
             self.voltageLogData = []
         }
         
+        uploadData(self.totalMilesLogData, keyPrefix: "totalMiles/") {
+                self.totalMilesLogData = []
+            }
         // reset the next upload time
         self.nextUploadTime = Date().addingTimeInterval(10*6)
     }
