@@ -75,28 +75,41 @@ class AWSManager {
         let polePairs = 14.0
         let radius = 1.5 // inches
         let inchesPerMile = 63360.0
-
         // Calculate circumference in inches
         let circumference = 2 * Double.pi * radius
         // Convert circumference from inches to miles
         let circumferenceMiles = circumference / inchesPerMile
-
         var totalDistance = 0.0
+        var rpmTotal = 0.0
+        var rpmCount = 0
 
         for item in rpmLogData {
             // Get the rpm value, convert from String to Double, then divide by polePairs
             if let rpmString = item["rpm"] as? String, let rpm = Double(rpmString) {
-                let convertedRpm = rpm / polePairs
-                let distance = convertedRpm * circumferenceMiles
-                print("Adding distance: \(distance)")
-                totalDistance += distance
+                rpmTotal += rpm
+                rpmCount += 1
+                // Every 10 readings (one second), calculate distance and reset
+                if rpmCount == 10 {
+                    let averageRpm = rpmTotal / 10
+                    let convertedRpm = averageRpm / polePairs
+                    let distance = convertedRpm * circumferenceMiles
+                    totalDistance += distance
+                    // Reset the total and count for the next second
+                    rpmTotal = 0.0
+                    rpmCount = 0
+                }
             }
         }
-
+        // Handle the case where there's a partial second at the end
+        if rpmCount > 0 {
+            let averageRpm = rpmTotal / Double(rpmCount)
+            let convertedRpm = averageRpm / polePairs
+            let distance = convertedRpm * circumferenceMiles
+            totalDistance += distance
+        }
         return totalDistance
     }
 
-    
 
     func updateTotalMiles() {
         totalMiles = calculateTotalMiles()

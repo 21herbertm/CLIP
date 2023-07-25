@@ -221,6 +221,32 @@ extension BluetoothManager: CBPeripheralDelegate {
         peripheral.writeValue(command!, for: characteristic, type: .withResponse)
     }
     
+    func formatData(_ data: String) -> String {
+        // If the data already contains "qVesc:", return it as is.
+        if data.contains("qVesc:") {
+            return data
+        }
+        // Split the string into an array of strings using comma as separator
+        let values = data.split(separator: ",")
+        
+        // Make sure there are enough values
+        guard values.count >= 6 else {
+            return data // return original data if it doesn't meet expected format
+        }
+        
+        // Format the data into your desired format
+        let formattedData = String(format: "qVesc: RPM %d, I %d mA, Vbatt %d mV, Charge %d, Temps %d C, Drive %d",
+                                   Int(values[1]) ?? 0,  // Adjusted for RPM
+                                   Int(values[0]) ?? 0,  // Adjusted for I
+                                   Int(values[2]) ?? 0,
+                                   Int(values[3]) ?? 0,
+                                   Int(values[4]) ?? 0,
+                                   Int(values[5]) ?? 0)
+        
+        return formattedData
+    }
+    
+    
     func extractRPM(from dataString: String) -> String? {
         // Assuming the RPM value is always followed by a comma
         // First, we locate the range of "RPM "
@@ -247,15 +273,16 @@ extension BluetoothManager: CBPeripheralDelegate {
                 print("Received data: \(data)")
                 if let string = String(data: data, encoding: .ascii) {
                     print("Received string data: \(string)")
-                    self.receivedData = string // update the published variable
+                    let formattedData = formatData(string)
+                    self.receivedData = formattedData // update the published variable
                     
                     // Extract the RPM value from the data string and log it
-                    if let rpmValue = extractRPM(from: string) {
+                    if let rpmValue = extractRPM(from: formattedData) {
                         AWSManager.shared.logRPMData(rpmValue)
                     }
                     
                     // Log data to AWS S3...
-                    AWSManager.shared.logData(string) // Call the method on the shared instance of AWSManager
+                    AWSManager.shared.logData(formattedData) // Call the method on the shared instance of AWSManager
                 }
             }
         }
