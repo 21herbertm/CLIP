@@ -9,20 +9,19 @@ import Amplify
 import AmplifyPlugins
 import Foundation
 
-class AWSManager {
+class AWSManager: ObservableObject {
     
     static let shared = AWSManager()
     let s3BucketKey = "data/"
-    
+
     // Store multiple logs in a dictionary
     var logData: [[String: Any]] = []
     var rpmLogData: [[String: Any]] = []
     var temperatureLogData: [[String: Any]] = []
     var voltageLogData: [[String: Any]] = []
-    var totalMiles: Double = 0.0
+    @Published var totalMiles: Double = 0.0
     var totalMilesLogData: [[String: Any]] = []
 
-    
     var nextUploadTime: Date = Date().addingTimeInterval(10*6) // The initial time to start uploading the data
     
     // Function to accumulate data

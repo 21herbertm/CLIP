@@ -18,6 +18,7 @@ struct ContentView: View {
     @State private var isShowingRegister = false
     @State private var isAuthenticated = false
     @State private var isScanning = false
+    @StateObject var awsManager: AWSManager = .shared
     
     @State private var username = ""
     @State private var password = ""
@@ -175,32 +176,33 @@ struct ContentView: View {
                         loginView()
                     }
                     
-                    if isAuthenticated {
-                        TabView {
-                            MyClipView()
-                                .tabItem {
-                                    Image(systemName: "1.circle")
-                                    Text("MyClip")
-                                }
-                            
-                            SupportView()
-                                .tabItem {
-                                    Image(systemName: "2.circle")
-                                    Text("Support")
-                                }
-                            
-                            NavigationView {
-                                AccountView()
-                                    .navigationBarTitleDisplayMode(.inline)
-                                    .navigationTitle("Account")
-                            }
-                            .tabItem {
-                                Image(systemName: "3.circle")
-                                Text("Account")
-                            }
+            if isAuthenticated {
+                TabView {
+                    MyClipView()
+                        .tabItem {
+                            Image(systemName: "1.circle")
+                            Text("MyClip")
                         }
-                        .environmentObject(bluetoothManager)
+
+                    SupportView()
+                        .tabItem {
+                            Image(systemName: "2.circle")
+                            Text("Support")
+                        }
+                    
+                    NavigationView {
+                        AccountView()
+                            .navigationBarTitleDisplayMode(.inline)
+                            .navigationTitle("Account")
                     }
+                    .tabItem {
+                        Image(systemName: "3.circle")
+                        Text("Account")
+                    }
+                }
+                .environmentObject(bluetoothManager)
+                .environmentObject(awsManager)
+            }
                 }
             }
         }
