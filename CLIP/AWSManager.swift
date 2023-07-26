@@ -23,7 +23,17 @@ class AWSManager: ObservableObject {
     var totalMilesLogData: [[String: Any]] = []
 
     var nextUploadTime: Date = Date().addingTimeInterval(10*6) // The initial time to start uploading the data
-    
+   
+    var rpmChartData: [Double] {
+        return self.rpmLogData.compactMap { logEntry in
+            if let rpmString = logEntry["rpm"] as? String, let rpm = Double(rpmString) {
+                return rpm
+            }
+            return nil
+        }
+    }
+
+
     // Function to accumulate data
     func logData(_ data: String) {
         let date = Date()

@@ -19,6 +19,7 @@
 		B0B1254E2A44CF3200D50B81 /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B1254D2A44CF3200D50B81 /* LaunchScreenView.swift */; };
 		B0B125542A44E78400D50B81 /* AWSManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B125532A44E78400D50B81 /* AWSManager.swift */; };
 		B0BB9E3E2A6EC43300786E0B /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BB9E3D2A6EC43300786E0B /* ChartView.swift */; };
+		B0D4ECCB2A718BC8001C79D4 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = B0D4ECCA2A718BC8001C79D4 /* SwiftUICharts */; };
 		B0EACD452A563CCC001B2D67 /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = B0EACD442A563CCC001B2D67 /* amplifyconfiguration.json */; };
 		B0EACD472A563CF8001B2D67 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EACD462A563CF8001B2D67 /* AccountView.swift */; };
 		B0EACD492A563D12001B2D67 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = B0EACD482A563D12001B2D67 /* awsconfiguration.json */; };
@@ -58,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0D4ECCB2A718BC8001C79D4 /* SwiftUICharts in Frameworks */,
 				B09227692A3CA7F9006DE80B /* NordicDFU in Frameworks */,
 				D8372BC9917073946F50F887 /* Pods_CLIP.framework in Frameworks */,
 			);
@@ -155,6 +157,7 @@
 			name = CLIP;
 			packageProductDependencies = (
 				B09227682A3CA7F9006DE80B /* NordicDFU */,
+				B0D4ECCA2A718BC8001C79D4 /* SwiftUICharts */,
 			);
 			productName = CLIP;
 			productReference = B09227542A3CA3C3006DE80B /* CLIP.app */;
@@ -186,6 +189,7 @@
 			mainGroup = B092274B2A3CA3C3006DE80B;
 			packageReferences = (
 				B09227672A3CA7F9006DE80B /* XCRemoteSwiftPackageReference "IOS-Pods-DFU-Library" */,
+				B0D4ECC92A718BC8001C79D4 /* XCRemoteSwiftPackageReference "ChartView" */,
 			);
 			productRefGroup = B09227552A3CA3C3006DE80B /* Products */;
 			projectDirPath = "";
@@ -488,6 +492,14 @@
 				minimumVersion = 4.0.0;
 			};
 		};
+		B0D4ECC92A718BC8001C79D4 /* XCRemoteSwiftPackageReference "ChartView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AppPear/ChartView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -495,6 +507,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B09227672A3CA7F9006DE80B /* XCRemoteSwiftPackageReference "IOS-Pods-DFU-Library" */;
 			productName = NordicDFU;
+		};
+		B0D4ECCA2A718BC8001C79D4 /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B0D4ECC92A718BC8001C79D4 /* XCRemoteSwiftPackageReference "ChartView" */;
+			productName = SwiftUICharts;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

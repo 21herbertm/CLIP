@@ -6,15 +6,14 @@
 //
 
 import SwiftUI
+import SwiftUICharts
 
 struct ChartView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
+    @ObservedObject var awsManager = AWSManager.shared
 
-struct ChartView_Previews: PreviewProvider {
-    static var previews: some View {
-        ChartView()
+    var body: some View {
+        VStack {
+            LineView(data: awsManager.rpmChartData, title: "RPM", legend: "RPM over Time").padding()
+        }
     }
 }

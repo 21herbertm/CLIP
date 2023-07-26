@@ -26,8 +26,8 @@ struct ContentView: View {
     
     func register(username: String, password: String, email: String) {
         AWSMobileClient.default().signUp(username: username,
-                                          password: password,
-                                          userAttributes: ["email" : email]) { (signUpResult, error) in
+                                         password: password,
+                                         userAttributes: ["email" : email]) { (signUpResult, error) in
             if let signUpResult = signUpResult {
                 switch signUpResult.signUpConfirmationState {
                 case .confirmed:
@@ -62,19 +62,19 @@ struct ContentView: View {
             Text("Login Screen")
                 .font(.largeTitle)
                 .fontWeight(.bold)
-
+            
             TextField("Username", text: $username)
                 .padding()
                 .background(Color(.systemGray6))
                 .cornerRadius(10)
                 .padding(.bottom, 10)
-
+            
             SecureField("Password", text: $password)
                 .padding()
                 .background(Color(.systemGray6))
                 .cornerRadius(10)
                 .padding(.bottom, 20)
-
+            
             Button(action: {
                 AWSMobileClient.default().signIn(username: username, password: password) { (signInResult, error) in
                     if let error = error {
@@ -99,7 +99,7 @@ struct ContentView: View {
                     .background(Color.blue)
                     .cornerRadius(10)
             }
-
+            
             Button(action: {
                 isShowingRegister = true
                 isShowingLogin = false
@@ -119,63 +119,63 @@ struct ContentView: View {
     var body: some View {
         VStack {
             if isAuthenticated {
-                            if isScanning {
-                                NavigationLink(destination: ScanDevicesView(isScanning: $isScanning)
-                                                    .environmentObject(bluetoothManager),
-                                               isActive: $isScanning) {
-                                    EmptyView()
-                                }
-                                .hidden()
-                            } else {
-                                NavigationLink(destination: ScanDevicesView(isScanning: $isScanning)
-                                                    .environmentObject(bluetoothManager)) {
-                                    Text("Scan for devices and Bluetooth pair")
-                                        .font(.title)
-                                        .padding()
-                                }
-                            }
-                        }else if isShowingRegister {
-                        // Add your registration view here
-                        VStack {
-                            Text("Registration Screen")
-                                .font(.largeTitle)
-                                .fontWeight(.bold)
-
-                            TextField("Username", text: $username)
-                                .padding()
-                                .background(Color(.systemGray6))
-                                .cornerRadius(10)
-                                .padding(.bottom, 10)
-
-                            SecureField("Password", text: $password)
-                                .padding()
-                                .background(Color(.systemGray6))
-                                .cornerRadius(10)
-                                .padding(.bottom, 10)
-                            
-                            TextField("Email", text: $email)
-                                .padding()
-                                .background(Color(.systemGray6))
-                                .cornerRadius(10)
-                                .padding(.bottom, 20)
-
-                            Button(action: {
-                                register(username: username, password: password, email: email)
-                            }) {
-                                Text("Register")
-                                    .font(.title)
-                                    .foregroundColor(.white)
-                                    .padding()
-                                    .background(Color.blue)
-                                    .cornerRadius(10)
-                            }
-                        }
-                        .padding()
-                        .environmentObject(bluetoothManager)
-                    } else {
-                        loginView()
+                if isScanning {
+                    NavigationLink(destination: ScanDevicesView(isScanning: $isScanning)
+                        .environmentObject(bluetoothManager),
+                                   isActive: $isScanning) {
+                        EmptyView()
                     }
+                                   .hidden()
+                } else {
+                    NavigationLink(destination: ScanDevicesView(isScanning: $isScanning)
+                        .environmentObject(bluetoothManager)) {
+                            Text("Scan for devices and Bluetooth pair")
+                                .font(.title)
+                                .padding()
+                        }
+                }
+            }else if isShowingRegister {
+                // Add your registration view here
+                VStack {
+                    Text("Registration Screen")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
                     
+                    TextField("Username", text: $username)
+                        .padding()
+                        .background(Color(.systemGray6))
+                        .cornerRadius(10)
+                        .padding(.bottom, 10)
+                    
+                    SecureField("Password", text: $password)
+                        .padding()
+                        .background(Color(.systemGray6))
+                        .cornerRadius(10)
+                        .padding(.bottom, 10)
+                    
+                    TextField("Email", text: $email)
+                        .padding()
+                        .background(Color(.systemGray6))
+                        .cornerRadius(10)
+                        .padding(.bottom, 20)
+                    
+                    Button(action: {
+                        register(username: username, password: password, email: email)
+                    }) {
+                        Text("Register")
+                            .font(.title)
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(Color.blue)
+                            .cornerRadius(10)
+                    }
+                }
+                .padding()
+                .environmentObject(bluetoothManager)
+            } else {
+                loginView()
+            }
+            
             if isAuthenticated {
                 TabView {
                     MyClipView()
@@ -183,7 +183,7 @@ struct ContentView: View {
                             Image(systemName: "1.circle")
                             Text("MyClip")
                         }
-
+                    
                     SupportView()
                         .tabItem {
                             Image(systemName: "2.circle")
@@ -199,13 +199,23 @@ struct ContentView: View {
                         Image(systemName: "3.circle")
                         Text("Account")
                     }
+                    
+                    NavigationView {
+                        ChartView()
+                            .navigationBarTitleDisplayMode(.inline)
+                            .navigationTitle("Charts")
+                    }
+                    .tabItem {
+                        Image(systemName: "4.circle")
+                        Text("Charts")
+                    }
                 }
                 .environmentObject(bluetoothManager)
                 .environmentObject(awsManager)
             }
-                }
-            }
         }
+    }
+}
 
     struct ContentView_Previews: PreviewProvider {
         static var previews: some View {
