@@ -262,6 +262,35 @@ extension BluetoothManager: CBPeripheralDelegate {
     }
     
     
+    func extractTemp(from dataString: String) -> String? {
+        // Assuming the Temp value is always followed by a comma
+        // First, we locate the range of "Temps "
+        if let range = dataString.range(of: "Temps ") {
+            // Then, we find the range of the following comma
+            if let endRange = dataString[range.upperBound...].firstIndex(of: ",") {
+                // Extract the substring from the data string
+                let tempValue = String(dataString[range.upperBound..<endRange])
+                return tempValue
+            }
+        }
+        return nil
+    }
+
+    func extractVoltage(from dataString: String) -> String? {
+        // Assuming the Voltage value is always followed by a comma
+        // First, we locate the range of "Vbatt "
+        if let range = dataString.range(of: "Vbatt ") {
+            // Then, we find the range of the following comma
+            if let endRange = dataString[range.upperBound...].firstIndex(of: ",") {
+                // Extract the substring from the data string
+                let voltageValue = String(dataString[range.upperBound..<endRange])
+                return voltageValue
+            }
+        }
+        return nil
+    }
+
+    
     
     
     // Handle received notifications
@@ -279,6 +308,14 @@ extension BluetoothManager: CBPeripheralDelegate {
                     // Extract the RPM value from the data string and log it
                     if let rpmValue = extractRPM(from: formattedData) {
                         AWSManager.shared.logRPMData(rpmValue)
+                    }
+                    
+                    // Extract the Temperature and Voltage values from the data string and log them
+                    if let tempValue = extractTemp(from: formattedData) {
+                        AWSManager.shared.logTemperatureData(tempValue)
+                    }
+                    if let voltageValue = extractVoltage(from: formattedData) {
+                        AWSManager.shared.logVoltageData(voltageValue)
                     }
                     
                     // Log data to AWS S3...

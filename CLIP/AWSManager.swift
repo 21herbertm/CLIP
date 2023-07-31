@@ -22,6 +22,7 @@ class AWSManager: ObservableObject {
     @Published var totalMiles: Double = 0.0
     var totalMilesLogData: [[String: Any]] = []
 
+    
     var nextUploadTime: Date = Date().addingTimeInterval(10*6) // The initial time to start uploading the data
    
     var rpmChartData: [Double] {
@@ -32,7 +33,42 @@ class AWSManager: ObservableObject {
             return nil
         }
     }
+    
+    var voltageChartData: [Double] {
+        return self.voltageLogData.compactMap { logEntry in
+            if let voltageString = logEntry["voltage"] as? String, let voltage = Double(voltageString) {
+                return voltage
+            }
+            return nil
+        }
+    }
 
+    var temperatureChartData: [Double] {
+        return self.temperatureLogData.compactMap { logEntry in
+            if let temperatureString = logEntry["temperature"] as? String, let temperature = Double(temperatureString) {
+                return temperature
+            }
+            return nil
+        }
+    }
+
+    var combinedChartData: [(Double, Double, Double)] {
+        let rpmData = rpmChartData
+        let voltageData = voltageChartData
+        let temperatureData = temperatureChartData
+
+        var combinedData: [(Double, Double, Double)] = []
+
+        for i in 0..<rpmData.count {
+            let rpm = rpmData[i]
+            let voltage = i < voltageData.count ? voltageData[i] : nil
+            let temperature = i < temperatureData.count ? temperatureData[i] : nil
+
+            combinedData.append((rpm, voltage ?? 0, temperature ?? 0))
+        }
+
+        return combinedData
+    }
 
     // Function to accumulate data
     func logData(_ data: String) {
@@ -65,6 +101,31 @@ class AWSManager: ObservableObject {
         checkAndUpload()
     }
     
+    func logTemperatureData(_ temperature: String) {
+            let date = Date()
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            let dateString = formatter.string(from: date)
+            
+            let currentLogData: [String: Any] = ["date": dateString, "temperature": temperature]
+            self.temperatureLogData.append(currentLogData)
+            
+            checkAndUpload()
+        }
+
+        // Function to log voltage data
+    func logVoltageData(_ voltage: String) {
+            let date = Date()
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            let dateString = formatter.string(from: date)
+            
+            let currentLogData: [String: Any] = ["date": dateString, "voltage": voltage]
+            self.voltageLogData.append(currentLogData)
+            
+            checkAndUpload()
+        }
+    
     func checkAndUpload() {
         let date = Date()
         if date >= nextUploadTime {
@@ -72,13 +133,6 @@ class AWSManager: ObservableObject {
         }
     }
     
-    func logTemperatureData(_ temperature: String) {
-        // Similar to logRPMData
-    }
-    
-    func logVoltageData(_ voltage: String) {
-        // Similar to logRPMData
-    }
     
     func calculateTotalMiles() -> Double {
         let polePairs = 14.0
