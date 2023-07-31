@@ -196,6 +196,7 @@ struct ContentView: View {
                         AccountView()
                             .navigationBarTitleDisplayMode(.inline)
                             .navigationTitle("Account")
+                            .environmentObject(sessionManager)
                     }
                     .tabItem {
                         Image(systemName: "3.circle")
