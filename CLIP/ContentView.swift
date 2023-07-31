@@ -14,6 +14,8 @@ import AWSAuthUI
 
 struct ContentView: View {
     @EnvironmentObject var bluetoothManager: BluetoothManager
+    @EnvironmentObject private var sessionManager: SessionManager
+    
     @State private var isShowingLogin = false
     @State private var isShowingRegister = false
     @State private var isAuthenticated = false
