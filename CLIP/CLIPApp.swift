@@ -26,9 +26,26 @@ struct CLIPApp: App {
                     LaunchScreenView()
                 } else {
                     NavigationView {
-                        ContentView()
-                            .environmentObject(bluetoothManager)
-                            .environmentObject(sessionManager)
+                        WindowGroup {
+                            switch sessionManager.authState {
+                            case .login:
+                                LoginView()
+                                    .environmentObject(sessionManager)
+                                
+                            case .signUp:
+                                SignUpView()
+                                    .environmentObject(sessionManager)
+                                
+                            case .confirmCode(let username):
+                                ConfirmationView(username: username)
+                                    .environmentObject(sessionManager)
+                                
+                            case .session(let user):
+                                ContentView()
+                                    .environmentObject(bluetoothManager)
+                                    .environmentObject(sessionManager)
+                            }
+                        }
                     }
                 }
             }
