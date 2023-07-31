@@ -12,9 +12,11 @@ import AmplifyPlugins
 @main
 struct CLIPApp: App {
     @StateObject private var bluetoothManager = BluetoothManager()
+    @ObservedObject var sessionManager = SessionManager()
     
     init() {
         configureAmplify()
+        sessionManager.getCurrentAuthUser()
     }
     
     var body: some Scene {
