@@ -28,6 +28,7 @@ struct CLIPApp: App {
                     NavigationView {
                         ContentView()
                             .environmentObject(bluetoothManager)
+                            .environmentObject(sessionManager)
                     }
                 }
             }
