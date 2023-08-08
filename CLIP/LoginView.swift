@@ -40,7 +40,7 @@ struct LoginView: View {
                     .font(.headline)
                     .foregroundColor(.white)
                     .padding()
-                    .background(Color.blue)
+                    .background(Color(hex: "5abf90"))
                     .cornerRadius(10)
             }
             
@@ -49,7 +49,7 @@ struct LoginView: View {
             Button(action: sessionManager.showSignUp) {
                 Text("Don't have an account? Sign up.")
                     .font(.subheadline)
-                    .foregroundColor(.blue)
+                    .foregroundColor(Color(hex: "5abf90"))
                     .padding()
             }
         }
