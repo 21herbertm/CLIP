@@ -214,11 +214,13 @@ extension BluetoothManager: CBPeripheralDelegate {
     
     
     func fetchDataFromCharacteristic() {
-        guard let peripheral = self.connectedPeripheral,
-              let characteristic = self.commandCharacteristic else { return }
-        
-        let command = "tV1".data(using: .ascii)
-        peripheral.writeValue(command!, for: characteristic, type: .withResponse)
+        Timer.scheduledTimer(withTimeInterval: 0.25, repeats: true) { _ in
+            guard let peripheral = self.connectedPeripheral,
+                  let characteristic = self.commandCharacteristic else { return }
+            
+            let command = "tV1".data(using: .ascii)
+            peripheral.writeValue(command!, for: characteristic, type: .withResponse)
+        }
     }
     
     func formatData(_ data: String) -> String {

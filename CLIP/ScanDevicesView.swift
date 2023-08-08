@@ -14,9 +14,7 @@ struct ScanDevicesView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
-                Color(UIColor.systemMint)
-                    .frame(height: 120)
-                    .edgesIgnoringSafeArea(.top)
+                // Removed the green header
                 
                 GeometryReader { geometry in
                     VStack {
@@ -54,7 +52,7 @@ struct ScanDevicesView: View {
                         }) {
                             Text(isScanning ? "Stop Scanning" : "Scan for Devices")
                                 .padding()
-                                .background(Color.blue)
+                                .background(Color.black) // Changed button color to black
                                 .foregroundColor(.white)
                                 .cornerRadius(10)
                                 .padding()
@@ -66,6 +64,7 @@ struct ScanDevicesView: View {
             }
             .background(Color.white)
             .edgesIgnoringSafeArea(.bottom)
+            .navigationTitle("Pair your CLIP") // Added navigation title
         }
     }
 }

@@ -8,15 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		72C066282A53130000B3871D /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C066272A53130000B3871D /* SessionManager.swift */; };
+		72F290B22A814234004E9E8B /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F290B12A814234004E9E8B /* SignUpView.swift */; };
+		72F290B42A814251004E9E8B /* ConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F290B32A814251004E9E8B /* ConfirmationView.swift */; };
+		72F290B62A81426F004E9E8B /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F290B52A81426F004E9E8B /* LoginView.swift */; };
+		B065D9612A82B32800437D48 /* tempview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B065D9602A82B32800437D48 /* tempview.swift */; };
+		B065D9642A82B4B300437D48 /* VoltageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B065D9632A82B4B300437D48 /* VoltageView.swift */; };
+		B065D9692A82BAED00437D48 /* CombinedCharts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B065D9682A82BAED00437D48 /* CombinedCharts.swift */; };
+		B065D96B2A82BF7300437D48 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B065D96A2A82BF7300437D48 /* LaunchScreen.storyboard */; };
+		B065D96D2A82C08300437D48 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B065D96C2A82C08200437D48 /* Assets.xcassets */; };
 		B09227582A3CA3C3006DE80B /* CLIPApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09227572A3CA3C3006DE80B /* CLIPApp.swift */; };
 		B092275A2A3CA3C3006DE80B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09227592A3CA3C3006DE80B /* ContentView.swift */; };
-		B092275C2A3CA3C6006DE80B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B092275B2A3CA3C6006DE80B /* Assets.xcassets */; };
 		B092275F2A3CA3C6006DE80B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B092275E2A3CA3C6006DE80B /* Preview Assets.xcassets */; };
 		B09227662A3CA50A006DE80B /* BluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09227652A3CA50A006DE80B /* BluetoothManager.swift */; };
 		B09227692A3CA7F9006DE80B /* NordicDFU in Frameworks */ = {isa = PBXBuildFile; productRef = B09227682A3CA7F9006DE80B /* NordicDFU */; };
 		B09D32AF2A420392001D7733 /* DeviceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09D32AE2A420392001D7733 /* DeviceDetailView.swift */; };
-		B0B1254C2A44CE0A00D50B81 /* LaunchScreenView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0B1254B2A44CE0A00D50B81 /* LaunchScreenView.storyboard */; };
-		B0B1254E2A44CF3200D50B81 /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B1254D2A44CF3200D50B81 /* LaunchScreenView.swift */; };
 		B0B125542A44E78400D50B81 /* AWSManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B125532A44E78400D50B81 /* AWSManager.swift */; };
 		B0BB9E3E2A6EC43300786E0B /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BB9E3D2A6EC43300786E0B /* ChartView.swift */; };
 		B0D4ECCB2A718BC8001C79D4 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = B0D4ECCA2A718BC8001C79D4 /* SwiftUICharts */; };
@@ -33,25 +38,29 @@
 		1CEFB03B7204E7BC69352087 /* Pods_CLIP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CLIP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		58913F1F0DF99ECBDDBD4D9D /* Pods-CLIP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CLIP.debug.xcconfig"; path = "Target Support Files/Pods-CLIP/Pods-CLIP.debug.xcconfig"; sourceTree = "<group>"; };
 		72C066272A53130000B3871D /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
+		72F290B12A814234004E9E8B /* SignUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		72F290B32A814251004E9E8B /* ConfirmationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationView.swift; sourceTree = "<group>"; };
+		72F290B52A81426F004E9E8B /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		7F6044038E87A9C4F6327528 /* Pods-CLIP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CLIP.release.xcconfig"; path = "Target Support Files/Pods-CLIP/Pods-CLIP.release.xcconfig"; sourceTree = "<group>"; };
+		B065D9602A82B32800437D48 /* tempview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tempview.swift; sourceTree = "<group>"; };
+		B065D9632A82B4B300437D48 /* VoltageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoltageView.swift; sourceTree = "<group>"; };
+		B065D9682A82BAED00437D48 /* CombinedCharts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombinedCharts.swift; sourceTree = "<group>"; };
+		B065D96A2A82BF7300437D48 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B065D96C2A82C08200437D48 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B09227542A3CA3C3006DE80B /* CLIP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CLIP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B09227572A3CA3C3006DE80B /* CLIPApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLIPApp.swift; sourceTree = "<group>"; };
 		B09227592A3CA3C3006DE80B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		B092275B2A3CA3C6006DE80B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B092275E2A3CA3C6006DE80B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B09227652A3CA50A006DE80B /* BluetoothManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothManager.swift; sourceTree = "<group>"; };
 		B09D32AE2A420392001D7733 /* DeviceDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDetailView.swift; sourceTree = "<group>"; };
-		B0B1254B2A44CE0A00D50B81 /* LaunchScreenView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreenView.storyboard; sourceTree = "<group>"; };
-		B0B1254D2A44CF3200D50B81 /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
 		B0B125532A44E78400D50B81 /* AWSManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWSManager.swift; sourceTree = "<group>"; };
 		B0BB9E3D2A6EC43300786E0B /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
-		B0E2B5632A4A05930034E5B3 /* awsconfiguration.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
-		B0EACD442A563CCC001B2D67 /* amplifyconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = amplifyconfiguration.json; path = ../../../amplifyconfiguration.json; sourceTree = "<group>"; };
-		B0EACD462A563CF8001B2D67 /* AccountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountView.swift; path = ../../../../Downloads/AccountView.swift; sourceTree = "<group>"; };
-		B0EACD482A563D12001B2D67 /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = awsconfiguration.json; path = ../../../../Downloads/awsconfiguration.json; sourceTree = "<group>"; };
-		B0EACD4A2A563D35001B2D67 /* MyClipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyClipView.swift; path = ../../../../Downloads/MyClipView.swift; sourceTree = "<group>"; };
-		B0EACD4C2A563D52001B2D67 /* ScanDevicesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScanDevicesView.swift; path = ../../../../Downloads/ScanDevicesView.swift; sourceTree = "<group>"; };
-		B0EACD4E2A563D6D001B2D67 /* SupportView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SupportView.swift; path = ../../../../Downloads/SupportView.swift; sourceTree = "<group>"; };
+		B0EACD442A563CCC001B2D67 /* amplifyconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = amplifyconfiguration.json; path = ../Pods/Amplify/Amplify/Core/Configuration/amplifyconfiguration.json; sourceTree = "<group>"; };
+		B0EACD462A563CF8001B2D67 /* AccountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
+		B0EACD482A563D12001B2D67 /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
+		B0EACD4A2A563D35001B2D67 /* MyClipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyClipView.swift; sourceTree = "<group>"; };
+		B0EACD4C2A563D52001B2D67 /* ScanDevicesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanDevicesView.swift; sourceTree = "<group>"; };
+		B0EACD4E2A563D6D001B2D67 /* SupportView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupportView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,17 +123,21 @@
 				B0EACD4C2A563D52001B2D67 /* ScanDevicesView.swift */,
 				B0EACD4E2A563D6D001B2D67 /* SupportView.swift */,
 				B0BB9E3D2A6EC43300786E0B /* ChartView.swift */,
+				B065D9602A82B32800437D48 /* tempview.swift */,
 				B09D32AE2A420392001D7733 /* DeviceDetailView.swift */,
+				72F290B32A814251004E9E8B /* ConfirmationView.swift */,
 				72C066272A53130000B3871D /* SessionManager.swift */,
 				B09227572A3CA3C3006DE80B /* CLIPApp.swift */,
-				B0B1254B2A44CE0A00D50B81 /* LaunchScreenView.storyboard */,
-				B0B1254D2A44CF3200D50B81 /* LaunchScreenView.swift */,
+				72F290B52A81426F004E9E8B /* LoginView.swift */,
+				72F290B12A814234004E9E8B /* SignUpView.swift */,
+				B065D9682A82BAED00437D48 /* CombinedCharts.swift */,
+				B065D96A2A82BF7300437D48 /* LaunchScreen.storyboard */,
+				B065D9632A82B4B300437D48 /* VoltageView.swift */,
 				B09227592A3CA3C3006DE80B /* ContentView.swift */,
-				B092275B2A3CA3C6006DE80B /* Assets.xcassets */,
 				B0B125532A44E78400D50B81 /* AWSManager.swift */,
-				B0E2B5632A4A05930034E5B3 /* awsconfiguration.json */,
 				B092275D2A3CA3C6006DE80B /* Preview Content */,
 				B09227652A3CA50A006DE80B /* BluetoothManager.swift */,
+				B065D96C2A82C08200437D48 /* Assets.xcassets */,
 			);
 			path = CLIP;
 			sourceTree = "<group>";
@@ -208,8 +221,8 @@
 				B0EACD452A563CCC001B2D67 /* amplifyconfiguration.json in Resources */,
 				B0EACD492A563D12001B2D67 /* awsconfiguration.json in Resources */,
 				B092275F2A3CA3C6006DE80B /* Preview Assets.xcassets in Resources */,
-				B092275C2A3CA3C6006DE80B /* Assets.xcassets in Resources */,
-				B0B1254C2A44CE0A00D50B81 /* LaunchScreenView.storyboard in Resources */,
+				B065D96B2A82BF7300437D48 /* LaunchScreen.storyboard in Resources */,
+				B065D96D2A82C08300437D48 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,12 +277,17 @@
 			files = (
 				B0EACD4F2A563D6D001B2D67 /* SupportView.swift in Sources */,
 				B0EACD4B2A563D35001B2D67 /* MyClipView.swift in Sources */,
+				B065D9692A82BAED00437D48 /* CombinedCharts.swift in Sources */,
 				B0EACD472A563CF8001B2D67 /* AccountView.swift in Sources */,
-				B0B1254E2A44CF3200D50B81 /* LaunchScreenView.swift in Sources */,
+				72F290B62A81426F004E9E8B /* LoginView.swift in Sources */,
 				B0B125542A44E78400D50B81 /* AWSManager.swift in Sources */,
+				B065D9642A82B4B300437D48 /* VoltageView.swift in Sources */,
 				B092275A2A3CA3C3006DE80B /* ContentView.swift in Sources */,
 				B09227662A3CA50A006DE80B /* BluetoothManager.swift in Sources */,
 				B09227582A3CA3C3006DE80B /* CLIPApp.swift in Sources */,
+				72F290B22A814234004E9E8B /* SignUpView.swift in Sources */,
+				B065D9612A82B32800437D48 /* tempview.swift in Sources */,
+				72F290B42A814251004E9E8B /* ConfirmationView.swift in Sources */,
 				B09D32AF2A420392001D7733 /* DeviceDetailView.swift in Sources */,
 				72C066282A53130000B3871D /* SessionManager.swift in Sources */,
 				B0EACD4D2A563D52001B2D67 /* ScanDevicesView.swift in Sources */,
@@ -411,7 +429,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = s;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -444,7 +462,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = s;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

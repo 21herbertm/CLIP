@@ -18,7 +18,8 @@ enum AuthState {    // Different states of the user
 
 final class SessionManager: ObservableObject {  // Observable objects can be used between multiple views
     @Published var authState: AuthState = .login    // Published means any changes to this var will trigger UI updates
-    
+    @Published var loggedIn: Bool = false
+
     func getCurrentAuthUser() {
         if let user = Amplify.Auth.getCurrentUser() {
             authState = .session(user: user)    // If the user exists, then open session page
@@ -91,35 +92,36 @@ final class SessionManager: ObservableObject {  // Observable objects can be use
     }
     
     func login(username: String, password: String) {
-        _ = Amplify.Auth.signIn(username: username, password: password)
-        { [weak self] result in
-            switch result {
-            case .success(let signInResult):
-                print(signInResult)
-                if signInResult.isSignedIn {
+            _ = Amplify.Auth.signIn(username: username, password: password)
+            { [weak self] result in
+                switch result {
+                case .success(let signInResult):
+                    print(signInResult)
+                    if signInResult.isSignedIn {
+                        DispatchQueue.main.async {
+                            self?.getCurrentAuthUser()
+                            self?.loggedIn = true    // Set this to true when login is successful
+                        }
+                    }
+                    
+                case .failure(let error):
+                    print("Login error:", error)
+                }
+            }
+        }
+
+        func signOut() {
+            _ = Amplify.Auth.signOut { [weak self] result in
+                switch result {
+                case .success:
                     DispatchQueue.main.async {
                         self?.getCurrentAuthUser()
+                        self?.loggedIn = false    // Set this to false when logout is successful
                     }
-                }
                 
-            case .failure(let error):
-                print("Login error:", error)
-            }
-        }
-    }
-    
-    func signOut() {
-        _ = Amplify.Auth.signOut { [weak self] result in
-            switch result {
-            case .success:
-                DispatchQueue.main.async {
-                    self?.getCurrentAuthUser()
+                case .failure(let error):
+                    print("Sign out error:", error)
                 }
-            
-            case .failure(let error):
-                print("Sign out error:", error)
             }
         }
     }
-}
-
