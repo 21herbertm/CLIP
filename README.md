@@ -1,6 +1,6 @@
 # CLIP
 
-Hey guys 👋
+Hey there 👋
 
 Here are some helpful resources for you guys 🙌:
 
