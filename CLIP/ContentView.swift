@@ -44,9 +44,14 @@ struct ContentView: View {
                     } else {
                         NavigationLink(destination: ScanDevicesView(isScanning: $isScanning)
                             .environmentObject(bluetoothManager)) {
-                                Text("Scan for devices and Bluetooth pair")
-                                    .font(.title)
-                                    .padding()
+                                VStack {
+                                    Image(systemName: "bolt.horizontal.circle.fill")
+                                        .font(.title)
+                                    Text("Bluetooth Connect")
+                                        .font(.caption)
+                                        .foregroundColor(.gray)
+                                }
+                                .padding()
                             }
                     }
                 }

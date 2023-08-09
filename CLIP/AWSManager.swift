@@ -142,7 +142,7 @@ class AWSManager: ObservableObject {
         let circumference = 2 * Double.pi * radius
         // Convert circumference from inches to miles
         let circumferenceMiles = circumference / inchesPerMile
-        var totalDistance = 0.0
+        var totalDistance = 0.0/100
         var rpmTotal = 0.0
         var rpmCount = 0
 
