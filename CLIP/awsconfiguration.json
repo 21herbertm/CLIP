@@ -1,20 +1,48 @@
 {
-    "Version": "1.0",
+    "UserAgent": "aws-amplify/cli",
+    "Version": "0.1.0",
     "IdentityManager": {
         "Default": {}
     },
     "CredentialsProvider": {
         "CognitoIdentity": {
             "Default": {
-                "PoolId": "us-east-1_0HSPmqQoE",
+                "PoolId": "us-east-1:d0db5096-fef8-478a-ac1e-2acf863dac9e",
                 "Region": "us-east-1"
             }
         }
     },
     "CognitoUserPool": {
         "Default": {
-            "PoolId": "us-east-1_0HSPmqQoE",
-            "AppClientId": "138gvukqt59557bintiqbhqtdn",
+            "PoolId": "us-east-1_XOMXmGfxX",
+            "AppClientId": "1pl2poqa6veq45ab7nsoikcvkh",
+            "Region": "us-east-1"
+        }
+    },
+    "Auth": {
+        "Default": {
+            "authenticationFlowType": "USER_SRP_AUTH",
+            "mfaConfiguration": "OFF",
+            "mfaTypes": [
+                "SMS"
+            ],
+            "passwordProtectionSettings": {
+                "passwordPolicyMinLength": 8,
+                "passwordPolicyCharacters": []
+            },
+            "signupAttributes": [
+                "EMAIL"
+            ],
+            "socialProviders": [],
+            "usernameAttributes": [],
+            "verificationMechanisms": [
+                "EMAIL"
+            ]
+        }
+    },
+    "S3TransferUtility": {
+        "Default": {
+            "Bucket": "clip1e376ec10f4a4ec0835acb85123b798b133833-clip",
             "Region": "us-east-1"
         }
     }
