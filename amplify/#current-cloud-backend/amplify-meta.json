@@ -1,0 +1,73 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-clip-clip-133833-authRole",
+      "UnauthRoleArn": "arn:aws:iam::786856255145:role/amplify-clip-clip-133833-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::786856255145:role/amplify-clip-clip-133833-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-clip-clip-133833-deployment",
+      "UnauthRoleName": "amplify-clip-clip-133833-unauthRole",
+      "StackName": "amplify-clip-clip-133833",
+      "StackId": "arn:aws:cloudformation:us-east-1:786856255145:stack/amplify-clip-clip-133833/9078fd10-36db-11ee-a155-0a658604c6d1",
+      "AmplifyAppId": "d22wwkvru8n4vh"
+    }
+  },
+  "auth": {
+    "clipe5940a1d": {
+      "customAuth": false,
+      "dependsOn": [],
+      "frontendAuthConfig": {
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": []
+        },
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "socialProviders": [],
+        "usernameAttributes": [],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-clip-clip-133833-deployment/amplify-cfn-templates/auth/clipe5940a1d-cloudformation-template.json",
+        "logicalId": "authclipe5940a1d"
+      },
+      "lastPushTimeStamp": "2023-08-09T17:43:29.358Z",
+      "output": {
+        "UserPoolId": "us-east-1_XOMXmGfxX",
+        "AppClientIDWeb": "1dca1fd3jtv7kjue5gnpqsg639",
+        "AppClientID": "1pl2poqa6veq45ab7nsoikcvkh",
+        "IdentityPoolId": "us-east-1:d0db5096-fef8-478a-ac1e-2acf863dac9e",
+        "UserPoolArn": "arn:aws:cognito-idp:us-east-1:786856255145:userpool/us-east-1_XOMXmGfxX",
+        "IdentityPoolName": "clipe5940a1d_identitypool_e5940a1d__clip",
+        "UserPoolName": "clipe5940a1d_userpool_e5940a1d"
+      },
+      "lastPushDirHash": "GqltZwLLH+TGX4nPtoQ9b5SyLL4="
+    }
+  },
+  "storage": {
+    "s3bc34cfc8": {
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "S3",
+      "lastPushTimeStamp": "2023-08-09T17:43:29.358Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-clip-clip-133833-deployment/amplify-cfn-templates/storage/cloudformation-template.json",
+        "logicalId": "storages3bc34cfc8"
+      },
+      "output": {
+        "BucketName": "clip1e376ec10f4a4ec0835acb85123b798b133833-clip",
+        "Region": "us-east-1"
+      },
+      "lastPushDirHash": "T1BgG0N13WcBbof+LE4caLrgRZ0="
+    }
+  }
+}

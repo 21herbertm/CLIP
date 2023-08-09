@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		05DC5564057CC6333E8F12DB /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 08A340D6B3F9C6BB3CD53FEB /* awsconfiguration.json */; };
 		72C066282A53130000B3871D /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C066272A53130000B3871D /* SessionManager.swift */; };
 		72F290B22A814234004E9E8B /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F290B12A814234004E9E8B /* SignUpView.swift */; };
 		72F290B42A814251004E9E8B /* ConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F290B32A814251004E9E8B /* ConfirmationView.swift */; };
 		72F290B62A81426F004E9E8B /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F290B52A81426F004E9E8B /* LoginView.swift */; };
+		95B7FAAD02F8CA0582386809 /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 8CCAAAE43EA3D5206BB0B660 /* amplifyconfiguration.json */; };
 		B065D9612A82B32800437D48 /* tempview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B065D9602A82B32800437D48 /* tempview.swift */; };
 		B065D9642A82B4B300437D48 /* VoltageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B065D9632A82B4B300437D48 /* VoltageView.swift */; };
 		B065D9692A82BAED00437D48 /* CombinedCharts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B065D9682A82BAED00437D48 /* CombinedCharts.swift */; };
@@ -35,6 +37,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		08A340D6B3F9C6BB3CD53FEB /* awsconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; lastKnownFileType = text.json; name = awsconfiguration.json; path = awsconfiguration.json; sourceTree = "<group>"; };
 		1CEFB03B7204E7BC69352087 /* Pods_CLIP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CLIP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		58913F1F0DF99ECBDDBD4D9D /* Pods-CLIP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CLIP.debug.xcconfig"; path = "Target Support Files/Pods-CLIP/Pods-CLIP.debug.xcconfig"; sourceTree = "<group>"; };
 		72C066272A53130000B3871D /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
@@ -42,6 +45,7 @@
 		72F290B32A814251004E9E8B /* ConfirmationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationView.swift; sourceTree = "<group>"; };
 		72F290B52A81426F004E9E8B /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		7F6044038E87A9C4F6327528 /* Pods-CLIP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CLIP.release.xcconfig"; path = "Target Support Files/Pods-CLIP/Pods-CLIP.release.xcconfig"; sourceTree = "<group>"; };
+		8CCAAAE43EA3D5206BB0B660 /* amplifyconfiguration.json */ = {isa = PBXFileReference; explicitFileType = text.json; lastKnownFileType = text.json; name = amplifyconfiguration.json; path = amplifyconfiguration.json; sourceTree = "<group>"; };
 		B065D9602A82B32800437D48 /* tempview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tempview.swift; sourceTree = "<group>"; };
 		B065D9632A82B4B300437D48 /* VoltageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoltageView.swift; sourceTree = "<group>"; };
 		B065D9682A82BAED00437D48 /* CombinedCharts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombinedCharts.swift; sourceTree = "<group>"; };
@@ -86,6 +90,15 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		6FB98B302A46B6650538A99A /* AmplifyConfig */ = {
+			isa = PBXGroup;
+			children = (
+				08A340D6B3F9C6BB3CD53FEB /* awsconfiguration.json */,
+				8CCAAAE43EA3D5206BB0B660 /* amplifyconfiguration.json */,
+			);
+			name = AmplifyConfig;
+			sourceTree = "<group>";
+		};
 		A7F59B6F32D6DBF77D98D63C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +114,7 @@
 				B09227552A3CA3C3006DE80B /* Products */,
 				4B5D63ACAC8A30357BE2198F /* Pods */,
 				A7F59B6F32D6DBF77D98D63C /* Frameworks */,
+				6FB98B302A46B6650538A99A /* AmplifyConfig */,
 			);
 			sourceTree = "<group>";
 			tabWidth = 4;
@@ -202,7 +216,7 @@
 			mainGroup = B092274B2A3CA3C3006DE80B;
 			packageReferences = (
 				B09227672A3CA7F9006DE80B /* XCRemoteSwiftPackageReference "IOS-Pods-DFU-Library" */,
-				B0D4ECC92A718BC8001C79D4 /* XCRemoteSwiftPackageReference "ChartView" */,
+				B0D4ECC92A718BC8001C79D4 /* XCRemoteSwiftPackageReference "ChartView.git" */,
 			);
 			productRefGroup = B09227552A3CA3C3006DE80B /* Products */;
 			projectDirPath = "";
@@ -223,6 +237,8 @@
 				B092275F2A3CA3C6006DE80B /* Preview Assets.xcassets in Resources */,
 				B065D96B2A82BF7300437D48 /* LaunchScreen.storyboard in Resources */,
 				B065D96D2A82C08300437D48 /* Assets.xcassets in Resources */,
+				05DC5564057CC6333E8F12DB /* awsconfiguration.json in Resources */,
+				95B7FAAD02F8CA0582386809 /* amplifyconfiguration.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -510,7 +526,7 @@
 				minimumVersion = 4.0.0;
 			};
 		};
-		B0D4ECC92A718BC8001C79D4 /* XCRemoteSwiftPackageReference "ChartView" */ = {
+		B0D4ECC92A718BC8001C79D4 /* XCRemoteSwiftPackageReference "ChartView.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AppPear/ChartView.git";
 			requirement = {
@@ -528,7 +544,7 @@
 		};
 		B0D4ECCA2A718BC8001C79D4 /* SwiftUICharts */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = B0D4ECC92A718BC8001C79D4 /* XCRemoteSwiftPackageReference "ChartView" */;
+			package = B0D4ECC92A718BC8001C79D4 /* XCRemoteSwiftPackageReference "ChartView.git" */;
 			productName = SwiftUICharts;
 		};
 /* End XCSwiftPackageProductDependency section */
