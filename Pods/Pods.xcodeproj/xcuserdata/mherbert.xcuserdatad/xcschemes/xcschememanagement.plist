@@ -63,12 +63,12 @@
 		<key>AWSPluginsCore.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>15</integer>
+			<integer>17</integer>
 		</dict>
 		<key>AWSS3.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>17</integer>
+			<integer>16</integer>
 		</dict>
 		<key>AWSUserPoolsSignIn-AWSUserPoolsSignIn.xcscheme</key>
 		<dict>

@@ -53,13 +53,6 @@ struct LoginView: View {
                     .padding()
             }
             
-            Button("Sign Out", action: sessionManager.signOut)
-                .foregroundColor(.white) // Text color
-                .padding()
-                .frame(width: 200) // Specific width
-                .background(Color(hex: "5abf90")) // Background color to make it stand out
-                .cornerRadius(10)
-                .padding(.bottom, 20) // Add some bottom padding if needed
         }
         .padding()
     }

@@ -16,6 +16,7 @@ struct CLIPApp: App {
     
     init() {
         configureAmplify()
+        sessionManager.signOut()
         sessionManager.getCurrentAuthUser()
         UINavigationBar.appearance().tintColor = UIColor(red: 90.0 / 255.0, green: 191.0 / 255.0, blue: 90.0 / 255.0, alpha: 1.0)
     }

@@ -110,7 +110,7 @@ final class SessionManager: ObservableObject {  // Observable objects can be use
             }
         }
 
-        func signOut() {
+    func signOut() {
             _ = Amplify.Auth.signOut { [weak self] result in
                 switch result {
                 case .success:

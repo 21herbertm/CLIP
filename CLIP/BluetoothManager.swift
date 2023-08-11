@@ -91,7 +91,7 @@ class BluetoothManager: NSObject, CBCentralManagerDelegate, ObservableObject, DF
 
     // Perform the firmware update
     func updateFirmware() {
-        let downloadURL = URL(string: "https://drive.google.com/file/d/1tpHDddaM3pxgfr3wcHORf1bEW1ZnEU9a/view?usp=drive_link")!
+        let downloadURL = URL(string: "https://drive.google.com/uc?id=1tpHDddaM3pxgfr3wcHORf1bEW1ZnEU9a&export=download")!
 
         let task = URLSession.shared.downloadTask(with: downloadURL) { [weak self] localURL, response, error in
             guard let self = self else { return }

@@ -86,7 +86,7 @@ struct ContentView: View {
                             Image(systemName: "chart.bar") // Symbol for charts
                             Text("Charts")
                         }
-                        
+                        /*
                         NavigationView {
                             tempview()
                         }
@@ -110,6 +110,7 @@ struct ContentView: View {
                             Image(systemName: "chart.bar") // Symbol for charts
                             Text("Combined Chart")
                         }
+                         */
                     }
                     .environmentObject(bluetoothManager)
                     .environmentObject(awsManager)
